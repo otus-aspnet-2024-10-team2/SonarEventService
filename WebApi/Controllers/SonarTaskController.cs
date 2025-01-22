@@ -28,14 +28,14 @@ namespace WebApi.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetAsync(int id, CancellationToken cancellationToken)
         {
-            var lessonDto = await _service.GetByIdAsync(id, cancellationToken);
-            return Ok(_mapper.Map<SonarTaskDto, SonarTaskModel>(lessonDto));
+            var sonarTaskDto = await _service.GetByIdAsync(id, cancellationToken);
+            return Ok(_mapper.Map<SonarTaskDto, SonarTaskModel>(sonarTaskDto));
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddAsync(CreatingSonarTaskModel creatingLessonDto)
+        public async Task<IActionResult> AddAsync(CreatingSonarTaskModel creatingSonarTaskDto)
         {
-            return Ok(await _service.CreateAsync(_mapper.Map<CreatingSonarTaskModel, CreatingSonarTaskDto>(creatingLessonDto)));
+            return Ok(await _service.CreateAsync(_mapper.Map<CreatingSonarTaskModel, CreatingSonarTaskDto>(creatingSonarTaskDto)));
         }
         
         [HttpPut("{id}")]

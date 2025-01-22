@@ -54,11 +54,12 @@ namespace Services.Implementations
             lesson.SonarProcessId = сreatingSonarTaskDto.SonarProcessId;
             var createdSonarTask = await _sonarTaskRepository.AddAsync(lesson);
             await _sonarTaskRepository.SaveChangesAsync();
+            // здесь как понял идет публикация сообщения ... надо изучать пока закоментировал, как понимаю отправляет сообщение
+            //await _busControl.Publish(new MessageDto
+            //{
+            //    Content = $"Sonar Task {createdSonarTask.Id} with subject {createdSonarTask.Subject} is added"
+            //});
 
-            await _busControl.Publish(new MessageDto
-            {
-                Content = $"Sonar Task {createdSonarTask.Id} with subject {createdSonarTask.Subject} is added"
-            });
 
             return createdSonarTask.Id;
         }
