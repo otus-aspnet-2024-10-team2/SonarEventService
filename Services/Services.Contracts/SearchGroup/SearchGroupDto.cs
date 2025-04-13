@@ -5,7 +5,7 @@
 /// </summary>
 public class SearchGroupDto
 {
-    public int GroupId { get; set; }
-    public int RequestId { get; set; }
-    public int LeaderId { get; set; }
+    public long GroupId { get; set; }
+    public long RequestId { get; set; }
+    public long LeaderId { get; set; }
 }

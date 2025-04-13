@@ -2,8 +2,8 @@
 
 public class GroupMemberDto
 {
-    public int MemberId { get; set; }
-    public int GroupId { get; set; }
-    public int UserId { get; set; }
+    public long MemberId { get; set; }
+    public long GroupId { get; set; }
+    public long UserId { get; set; }
     public string Role { get; set; }
 }

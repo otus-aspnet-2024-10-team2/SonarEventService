@@ -2,8 +2,8 @@
 
 public class SearchGroupFilterDto
 {
-    public int RequestId { get; set; }
-    public int LeaderId { get; set; }
+    public long RequestId { get; set; }
+    public long LeaderId { get; set; }
 
     public int ItemsPerPage { get; set; }
 

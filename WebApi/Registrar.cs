@@ -38,6 +38,8 @@ namespace WebApi
             serviceCollection
                 .AddTransient<ISonarProcessRepository, SonarProcessRepository>()
                 .AddTransient<ISonarTaskRepository, SonarTaskRepository>()
+                .AddTransient<ISearchGroupRepository, SearchGroupRepository>()
+                .AddTransient<IGroupMemberRepository, GroupMemberRepository>()
                 .AddTransient<IUnitOfWork, UnitOfWork>();
             return serviceCollection;
         }
