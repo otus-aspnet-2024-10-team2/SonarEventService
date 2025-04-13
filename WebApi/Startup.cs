@@ -91,8 +91,12 @@ namespace WebApi
             {
                 cfg.AddProfile<SonarProcessMappingsProfile>();
                 cfg.AddProfile<SonarTaskMappingsProfile>();
+                cfg.AddProfile<SearchGroupMappingProfile>();
+                cfg.AddProfile<GroupMemberMappingProfile>();
                 cfg.AddProfile<Services.Implementations.Mapping.SonarProcessMappingsProfile>();
                 cfg.AddProfile<Services.Implementations.Mapping.SonarTaskMappingsProfile>();
+                cfg.AddProfile<Services.Implementations.Mapping.SearchGroupMappingsProfile>();
+                //cfg.AddProfile<Services.Implementations.Mapping.GroupMemberMappingsProfile>();
             });
             configuration.AssertConfigurationIsValid();
             return configuration;

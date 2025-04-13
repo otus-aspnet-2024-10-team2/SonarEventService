@@ -34,15 +34,15 @@ public class SearchGroupsController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateAsync(CreatingSearchGroupModel courseModel)
+    public async Task<IActionResult> CreateAsync(CreatingSearchGroupModel groupModel)
     {
-        return Ok(await _service.CreateAsync(_mapper.Map<CreatingSearchGroupDto>(courseModel)));
+        return Ok(await _service.CreateAsync(_mapper.Map<CreatingSearchGroupDto>(groupModel)));
     }
 
     [HttpPut("{groupId}")]
-    public async Task<IActionResult> EditAsync(long groupId, UpdatingSearchGroupModel courseModel)
+    public async Task<IActionResult> EditAsync(long groupId, UpdatingSearchGroupModel groupModel)
     {
-        await _service.UpdateAsync(groupId, _mapper.Map<UpdatingSearchGroupModel, UpdatingSearchGroupDto>(courseModel));
+        await _service.UpdateAsync(groupId, _mapper.Map<UpdatingSearchGroupModel, UpdatingSearchGroupDto>(groupModel));
         return Ok();
     }
 

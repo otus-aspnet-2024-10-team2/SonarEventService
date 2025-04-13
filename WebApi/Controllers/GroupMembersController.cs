@@ -31,15 +31,15 @@ public class GroupMembersController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateAsync(CreatingGroupMemberModel courseModel)
+    public async Task<IActionResult> CreateAsync(CreatingGroupMemberModel memberModel)
     {
-        return Ok(await _service.CreateAsync(_mapper.Map<CreatingGroupMemberDto>(courseModel)));
+        return Ok(await _service.CreateAsync(_mapper.Map<CreatingGroupMemberDto>(memberModel)));
     }
 
     [HttpPut("{memberId}")]
-    public async Task<IActionResult> EditAsync(int memberId, UpdatingGroupMemberModel courseModel)
+    public async Task<IActionResult> EditAsync(int memberId, UpdatingGroupMemberModel memberModel)
     {
-        await _service.UpdateAsync(memberId, _mapper.Map<UpdatingGroupMemberModel, UpdatingGroupMemberDto>(courseModel));
+        await _service.UpdateAsync(memberId, _mapper.Map<UpdatingGroupMemberModel, UpdatingGroupMemberDto>(memberModel));
         return Ok();
     }
 

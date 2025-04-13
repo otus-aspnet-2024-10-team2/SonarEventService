@@ -29,7 +29,9 @@ namespace WebApi
         {
             serviceCollection
                 .AddTransient<ISonarProcessService, SonarProcessService>()
-                .AddTransient<ISonarTaskService, SonarTaskService>();
+                .AddTransient<ISonarTaskService, SonarTaskService>()
+                .AddTransient<IGroupMemberService, GroupMemberService>()
+                .AddTransient<ISearchGroupService, SearchGroupService>();
             return serviceCollection;
         }
         
