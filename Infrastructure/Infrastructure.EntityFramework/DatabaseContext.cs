@@ -24,6 +24,16 @@ namespace Infrastructure.EntityFramework
         /// </summary>
         public DbSet<SonarTask> SonarTasks { get; set; }
 
+        /// <summary>
+        /// Группы поиска
+        /// </summary>
+        public DbSet<SearchGroup> SearchGroups { get; set; }
+
+        /// <summary>
+        /// Участники группы поиска
+        /// </summary>
+        public DbSet<GroupMember> GroupMembers { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);            
@@ -32,7 +42,13 @@ namespace Infrastructure.EntityFramework
                 .HasMany(u => u.SonarTasks)
                 .WithOne(c=> c.SonarProcess)
                 .IsRequired();
-            
+
+            modelBuilder.Entity<SearchGroup>()
+                .HasMany(u => u.Members)
+                .WithOne(c => c.Group)
+                .IsRequired();
+
+
             //modelBuilder.Entity<Course>().HasIndex(c=>c.Name);
 
             modelBuilder.Entity<SonarProcess>().Property(c => c.Name).HasMaxLength(100);
