@@ -1,0 +1,11 @@
+﻿namespace Domain.Entities;
+
+/// <summary>
+/// Пользователь/Участник системы поиска
+/// </summary>
+public class SearchUser : IEntity<long>
+{
+    public long Id { get; set; }
+
+    //TODO: Other properties
+}
