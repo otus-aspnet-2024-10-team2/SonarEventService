@@ -27,7 +27,7 @@ namespace Infrastructure.Repositories.Implementations
         /// <returns> Процесс поиска. </returns>
         public override async Task<SonarProcess> GetAsync(int id, CancellationToken cancellationToken)
         {
-            var query = Context.Set<SonarProcess>().AsQueryable();
+            var query = _context.Set<SonarProcess>().AsQueryable();
             return await query.SingleOrDefaultAsync(c => c.Id == id);
         }
         

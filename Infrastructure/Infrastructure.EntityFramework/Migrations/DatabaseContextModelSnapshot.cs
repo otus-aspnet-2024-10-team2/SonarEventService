@@ -66,9 +66,6 @@ namespace Infrastructure.EntityFramework.Migrations
                     b.Property<long>("RequestId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<long?>("SearchRequestId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("TEXT");
 
@@ -76,7 +73,7 @@ namespace Infrastructure.EntityFramework.Migrations
 
                     b.HasIndex("LeaderId");
 
-                    b.HasIndex("SearchRequestId");
+                    b.HasIndex("RequestId");
 
                     b.ToTable("SearchGroups");
                 });
@@ -201,13 +198,15 @@ namespace Infrastructure.EntityFramework.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.Entities.SearchRequest", "SearchRequest")
+                    b.HasOne("Domain.Entities.SearchRequest", "Request")
                         .WithMany()
-                        .HasForeignKey("SearchRequestId");
+                        .HasForeignKey("RequestId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Leader");
 
-                    b.Navigation("SearchRequest");
+                    b.Navigation("Request");
                 });
 
             modelBuilder.Entity("Domain.Entities.SearchTask", b =>

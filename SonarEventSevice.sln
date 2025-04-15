@@ -6,9 +6,6 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "WebApi\WebApi.csproj", "{BEB722CA-C4E0-4E1B-8536-071D183D5DD7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{DD04A90B-59BA-4453-A47D-029C3CA2B335}"
-	ProjectSection(SolutionItems) = preProject
-		Infrastructure\LocalDatabase.db = Infrastructure\LocalDatabase.db
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Hosts", "Hosts", "{C2D75D42-4C3F-4B52-8F4B-5D70DC304DC4}"
 EndProject

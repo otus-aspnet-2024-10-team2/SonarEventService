@@ -27,7 +27,7 @@ namespace Infrastructure.Repositories.Implementations
         /// <returns> Группа поиска. </returns>
         public override async Task<SearchGroup> GetAsync(long id, CancellationToken cancellationToken)
         {
-            var query = Context.Set<SearchGroup>().AsQueryable();
+            var query = _context.Set<SearchGroup>().AsQueryable();
             return await query.SingleOrDefaultAsync(c => c.Id == id);
         }
         

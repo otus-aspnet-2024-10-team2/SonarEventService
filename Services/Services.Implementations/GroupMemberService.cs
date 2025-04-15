@@ -26,6 +26,7 @@ public class GroupMemberService : IGroupMemberService
     public async Task<long> CreateAsync(CreatingGroupMemberDto creatingGroupMemberDto)
     {
         var groupMember = _mapper.Map<CreatingGroupMemberDto, GroupMember>(creatingGroupMemberDto);
+        groupMember.CreatedAt = DateTime.Now;
         var createdGroupMember = await _groupMemberRepository.AddAsync(groupMember);
         await _groupMemberRepository.SaveChangesAsync();
         return createdGroupMember.Id;
@@ -64,6 +65,7 @@ public class GroupMemberService : IGroupMemberService
         groupMember.GroupId = updatingGroupMemberDto.GroupId;
         groupMember.UserId = updatingGroupMemberDto.UserId;
         groupMember.Role = updatingGroupMemberDto.Role;
+        groupMember.UpdatedAt = DateTime.Now;
         _groupMemberRepository.Update(groupMember);
         await _groupMemberRepository.SaveChangesAsync();
     }

@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.EntityFramework.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20250413164027_AddAearchGroupsAndMembers")]
-    partial class AddAearchGroupsAndMembers
+    [Migration("20250415193506_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -69,9 +69,6 @@ namespace Infrastructure.EntityFramework.Migrations
                     b.Property<long>("RequestId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<long?>("SearchRequestId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("TEXT");
 
@@ -79,7 +76,7 @@ namespace Infrastructure.EntityFramework.Migrations
 
                     b.HasIndex("LeaderId");
 
-                    b.HasIndex("SearchRequestId");
+                    b.HasIndex("RequestId");
 
                     b.ToTable("SearchGroups");
                 });
@@ -204,13 +201,15 @@ namespace Infrastructure.EntityFramework.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.Entities.SearchRequest", "SearchRequest")
+                    b.HasOne("Domain.Entities.SearchRequest", "Request")
                         .WithMany()
-                        .HasForeignKey("SearchRequestId");
+                        .HasForeignKey("RequestId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Leader");
 
-                    b.Navigation("SearchRequest");
+                    b.Navigation("Request");
                 });
 
             modelBuilder.Entity("Domain.Entities.SearchTask", b =>

@@ -16,13 +16,13 @@ namespace Infrastructure.Repositories.Implementations
     public abstract class Repository<T, TPrimaryKey> : IRepository<T, TPrimaryKey> where T 
         : class, IEntity<TPrimaryKey>
     {
-        protected readonly DbContext Context;
+        protected readonly DbContext _context;
         private readonly DbSet<T> _entitySet;
 
         protected Repository(DbContext context)
         {
-            Context = context;
-            _entitySet = Context.Set<T>();
+            _context = context;
+            _entitySet = _context.Set<T>();
         }
 
         #region Get
@@ -131,7 +131,7 @@ namespace Infrastructure.Repositories.Implementations
         /// <param name="entity"> Сущность для изменения. </param>
         public virtual void Update(T entity)
         {
-            Context.Entry(entity).State = EntityState.Modified;
+            _context.Entry(entity).State = EntityState.Modified;
         }
 
         #endregion
@@ -165,7 +165,7 @@ namespace Infrastructure.Repositories.Implementations
             {
                 return false;
             }
-            Context.Entry(entity).State = EntityState.Deleted;
+            _context.Entry(entity).State = EntityState.Deleted;
             return true;
         }
 
@@ -193,7 +193,7 @@ namespace Infrastructure.Repositories.Implementations
         /// </summary>
         public virtual void SaveChanges()
         {
-            Context.SaveChanges();
+            _context.SaveChanges();
         }
 
         /// <summary>
@@ -201,7 +201,7 @@ namespace Infrastructure.Repositories.Implementations
         /// </summary>
         public virtual async Task SaveChangesAsync(CancellationToken cancellationToken = default)
         {
-            await Context.SaveChangesAsync(cancellationToken);
+            await _context.SaveChangesAsync(cancellationToken);
         }
 
         #endregion

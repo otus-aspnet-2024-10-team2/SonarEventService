@@ -27,7 +27,7 @@ namespace Infrastructure.Repositories.Implementations
         public override async Task<SonarTask> GetAsync(int id, CancellationToken cancellationToken)
         {
             //await Task.Delay(TimeSpan.FromSeconds(20));
-            var query = Context.Set<SonarTask>().AsQueryable();
+            var query = _context.Set<SonarTask>().AsQueryable();
             query = query
                 .Where(l => l.Id == id && !l.Deleted);
 

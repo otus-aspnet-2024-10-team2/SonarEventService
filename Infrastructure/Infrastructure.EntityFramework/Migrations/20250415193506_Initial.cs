@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Infrastructure.EntityFramework.Migrations
 {
     /// <inheritdoc />
-    public partial class AddAearchGroupsAndMembers : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -48,13 +48,27 @@ namespace Infrastructure.EntityFramework.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "SonarProcess",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", maxLength: 100, nullable: true),
+                    Price = table.Column<decimal>(type: "TEXT", nullable: false),
+                    Deleted = table.Column<bool>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SonarProcess", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "SearchGroups",
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     RequestId = table.Column<long>(type: "INTEGER", nullable: false),
-                    SearchRequestId = table.Column<long>(type: "INTEGER", nullable: true),
                     LeaderId = table.Column<long>(type: "INTEGER", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "TEXT", nullable: false)
@@ -69,10 +83,32 @@ namespace Infrastructure.EntityFramework.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_SearchGroups_SearchRequest_SearchRequestId",
-                        column: x => x.SearchRequestId,
+                        name: "FK_SearchGroups_SearchRequest_RequestId",
+                        column: x => x.RequestId,
                         principalTable: "SearchRequest",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SonarTasks",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Subject = table.Column<string>(type: "TEXT", maxLength: 100, nullable: true),
+                    SonarProcessId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Deleted = table.Column<bool>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SonarTasks", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SonarTasks_SonarProcess_SonarProcessId",
+                        column: x => x.SonarProcessId,
+                        principalTable: "SonarProcess",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -138,9 +174,9 @@ namespace Infrastructure.EntityFramework.Migrations
                 column: "LeaderId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SearchGroups_SearchRequestId",
+                name: "IX_SearchGroups_RequestId",
                 table: "SearchGroups",
-                column: "SearchRequestId");
+                column: "RequestId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SearchTask_SearchGroupId",
@@ -179,47 +215,6 @@ namespace Infrastructure.EntityFramework.Migrations
 
             migrationBuilder.DropTable(
                 name: "SearchRequest");
-
-            migrationBuilder.CreateTable(
-                name: "Courses",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Deleted = table.Column<bool>(type: "INTEGER", nullable: false),
-                    Name = table.Column<string>(type: "TEXT", maxLength: 100, nullable: true),
-                    Price = table.Column<decimal>(type: "TEXT", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Courses", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Lessons",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    CourseId = table.Column<int>(type: "INTEGER", nullable: false),
-                    Deleted = table.Column<bool>(type: "INTEGER", nullable: false),
-                    Subject = table.Column<string>(type: "TEXT", maxLength: 100, nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Lessons", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Lessons_Courses_CourseId",
-                        column: x => x.CourseId,
-                        principalTable: "Courses",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Lessons_CourseId",
-                table: "Lessons",
-                column: "CourseId");
         }
     }
 }

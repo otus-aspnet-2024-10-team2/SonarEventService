@@ -16,7 +16,7 @@ namespace Services.Implementations.Mapping
 
             CreateMap<CreatingSearchGroupDto, SearchGroup>()
                 .ForMember(d => d.Id, map => map.Ignore())
-                .ForMember(d => d.SearchRequest, map => map.Ignore())
+                .ForMember(d => d.Request, map => map.Ignore())
                 .ForMember(d => d.Leader, map => map.Ignore())
                 .ForMember(d => d.CreatedAt, map => map.Ignore())
                 .ForMember(d => d.UpdatedAt, map => map.Ignore())
@@ -25,7 +25,7 @@ namespace Services.Implementations.Mapping
 
             CreateMap<UpdatingSearchGroupDto, SearchGroup>()
                 .ForMember(d => d.Id, map => map.Ignore())
-                .ForMember(d => d.SearchRequest, map => map.Ignore())
+                .ForMember(d => d.Request, map => map.Ignore())
                 .ForMember(d => d.Leader, map => map.Ignore())
                 .ForMember(d => d.CreatedAt, map => map.Ignore())
                 .ForMember(d => d.UpdatedAt, map => map.Ignore())
