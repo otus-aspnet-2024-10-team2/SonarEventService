@@ -6,16 +6,16 @@ using Services.Repositories.Abstractions;
 using Domain.Entities;
 using Infrastructure.EntityFramework;
 using Microsoft.EntityFrameworkCore;
-using Services.Contracts.SonarProcess;
+using Services.Contracts.GroupMember;
 
 namespace Infrastructure.Repositories.Implementations
 {
     /// <summary>
-    /// Репозиторий работы с процессами.
+    /// Репозиторий работы с группами поиска.
     /// </summary>
-    public class SonarProcessRepository: Repository<SonarProcess, int>, ISonarProcessRepository
+    public class GroupMemberRepository : Repository<GroupMember, long>, IGroupMemberRepository
     {
-        public SonarProcessRepository(DatabaseContext context): base(context)
+        public GroupMemberRepository(DatabaseContext context): base(context)
         {
         }
 
@@ -24,10 +24,10 @@ namespace Infrastructure.Repositories.Implementations
         /// </summary>
         /// <param name="id"> Id сущности. </param>
         /// <param name="cancellationToken"></param>
-        /// <returns> Процесс поиска. </returns>
-        public override async Task<SonarProcess> GetAsync(int id, CancellationToken cancellationToken)
+        /// <returns> Участник группы поиска. </returns>
+        public override async Task<GroupMember> GetAsync(long id, CancellationToken cancellationToken)
         {
-            var query = _context.Set<SonarProcess>().AsQueryable();
+            var query = _context.Set<GroupMember>().AsQueryable();
             return await query.SingleOrDefaultAsync(c => c.Id == id);
         }
         
@@ -35,21 +35,18 @@ namespace Infrastructure.Repositories.Implementations
         /// Получить постраничный список.
         /// </summary>
         /// <param name="filterDto"> ДТО фильтра. </param>
-        /// <returns> Список процессов поиска. </returns>
-        public async Task<List<SonarProcess>> GetPagedAsync(SonarProcessFilterDto filterDto)
+        /// <returns> Список групп/участников поиска. </returns>
+        public async Task<List<GroupMember>> GetPagedAsync(GroupMemberFilterDto filterDto)
         {
-            var query = GetAll()
-                //.ToList().AsQueryable()
-                .Where(c => !c.Deleted);
-                //.Include(c => c.Lessons).AsQueryable();
-            if (!string.IsNullOrWhiteSpace(filterDto.Name))
+            var query = GetAll();
+
+            if (filterDto.GroupId > 0)
             {
-                query = query.Where(c => c.Name == filterDto.Name);
+                query = query.Where(c => c.GroupId == filterDto.GroupId);
             }
-            
-            if (filterDto.Price.HasValue && filterDto.Price != 0)
+            if (filterDto.UserId > 0)
             {
-                query = query.Where(c => c.Price == filterDto.Price);
+                query = query.Where(c => c.UserId == filterDto.UserId);
             }
 
             query = query
