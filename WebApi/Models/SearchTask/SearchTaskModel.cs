@@ -1,6 +1,6 @@
-﻿namespace WebApi.Models.SonarTask
+﻿namespace WebApi.Models.SearchTask
 {
-    public class SonarTaskModel
+    public class SearchTaskModel
     {
         /// <summary>
         /// Идентификатор.

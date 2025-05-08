@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using WebApi.Models.SonarTask;
+using WebApi.Models.SearchTask;
 
 namespace WebApi.Models.SonarProcess
 {
@@ -26,6 +26,6 @@ namespace WebApi.Models.SonarProcess
         /// <summary>
         /// Задачи поиска.
         /// </summary>
-        public List<SonarTaskModel> SonarTasks { get; set; }
+        public List<SearchTaskModel> SonarTasks { get; set; }
     }
 }

@@ -1,9 +1,9 @@
-﻿namespace WebApi.Models.SonarTask
+﻿namespace WebApi.Models.SearchTask
 {
     /// <summary>
     /// Модель редактируемой задачи поиска.
     /// </summary>
-    public class UpdatingSonarTaskModel
+    public class UpdatingSearchTaskModel
     {
         /// <summary>
         /// Тема.

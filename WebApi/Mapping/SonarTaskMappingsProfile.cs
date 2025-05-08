@@ -1,6 +1,6 @@
 using AutoMapper;
 using Services.Contracts.SonarTask;
-using WebApi.Models.SonarTask;
+using WebApi.Models.SearchTask;
 
 namespace WebApi.Mapping
 {
@@ -11,10 +11,10 @@ namespace WebApi.Mapping
     {
         public SonarTaskMappingsProfile()
         {
-            CreateMap<SearchTaskDto, SonarTaskModel>();
-            CreateMap<CreatingSonarTaskModel, CreatingSearchTaskDto>();
-            CreateMap<UpdatingSonarTaskModel, UpdatingSearchTaskDto>();
-            CreateMap<AttachingSonarTaskModel, AttachingSonarTasksDto>();
+            CreateMap<SearchTaskDto, SearchTaskModel>();
+            CreateMap<CreatingSearchTaskModel, CreatingSearchTaskDto>();
+            CreateMap<UpdatingSearchTaskModel, UpdatingSearchTaskDto>();
+            CreateMap<AttachingSearchTaskModel, AttachingSonarTasksDto>();
         }
     }
 }

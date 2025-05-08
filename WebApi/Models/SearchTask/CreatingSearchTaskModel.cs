@@ -1,6 +1,6 @@
-﻿namespace WebApi.Models.SonarTask
+﻿namespace WebApi.Models.SearchTask
 {
-    public class CreatingSonarTaskModel
+    public class CreatingSearchTaskModel
     {
         /// <summary>
         /// Идентификатор процесса поиска.
