@@ -3,7 +3,7 @@
     /// <summary>
     /// ДТО задачи поиска.
     /// </summary>
-    public class CreatingSonarTaskDto
+    public class CreatingSearchTaskDto
     {
         /// <summary>
         /// Идентификатор процесса поиска.

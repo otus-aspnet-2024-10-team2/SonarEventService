@@ -15,19 +15,19 @@ namespace Services.Implementations
     /// <summary>
     /// Сервис работы с задачами поиска.
     /// </summary>
-    public class SonarTaskService : ISonarTaskService
+    public class SearchTaskService : ISearchTaskService
     {
         private readonly IMapper _mapper;
-        private readonly ISonarTaskRepository _sonarTaskRepository;
+        private readonly ISearchTaskRepository _searchTaskRepository;
         private readonly IBusControl _busControl;
 
-        public SonarTaskService(
+        public SearchTaskService(
             IMapper mapper,
-            ISonarTaskRepository sonarTaskRepository,
+            ISearchTaskRepository searchTaskRepository,
             IBusControl busControl)
         {
             _mapper = mapper;
-            _sonarTaskRepository = sonarTaskRepository;
+            _searchTaskRepository = searchTaskRepository;
             _busControl = busControl;
         }
 
@@ -37,60 +37,59 @@ namespace Services.Implementations
         /// <param name="id"> Идентификатор. </param>
         /// <param name="cancellationToken"> Токен отмены </param>
         /// <returns> ДТО задачи поиска. </returns>
-        public async Task<SonarTaskDto> GetByIdAsync(int id, CancellationToken cancellationToken)
+        public async Task<SearchTaskDto> GetByIdAsync(long id, CancellationToken cancellationToken)
         {
-            var sonarTask = await _sonarTaskRepository.GetAsync(id, cancellationToken);
-            return _mapper.Map<SonarTask, SonarTaskDto>(sonarTask);
+            var searchTask = await _searchTaskRepository.GetAsync(id, cancellationToken);
+            return _mapper.Map<SearchTask, SearchTaskDto>(searchTask);
         }
 
         /// <summary>
         /// Создать задачу поиска.
         /// </summary>
-        /// <param name="сreatingSonarTaskDto"> ДТО задачи. </param>
+        /// <param name="сreatingSearchTaskDto"> ДТО задачи. </param>
         /// <returns> Идентификатор. </returns>
-        public async Task<int> CreateAsync(CreatingSonarTaskDto сreatingSonarTaskDto)
+        public async Task<long> CreateAsync(CreatingSearchTaskDto сreatingSearchTaskDto)
         {
-            var lesson = _mapper.Map<CreatingSonarTaskDto, SonarTask>(сreatingSonarTaskDto);
-            lesson.SonarProcessId = сreatingSonarTaskDto.SonarProcessId;
-            var createdSonarTask = await _sonarTaskRepository.AddAsync(lesson);
-            await _sonarTaskRepository.SaveChangesAsync();
+            var lesson = _mapper.Map<CreatingSearchTaskDto, SearchTask>(сreatingSearchTaskDto);
+            lesson.SonarProcessId = сreatingSearchTaskDto.SonarProcessId;
+            var createdSearchTask = await _searchTaskRepository.AddAsync(lesson);
+            await _searchTaskRepository.SaveChangesAsync();
             // здесь как понял идет публикация сообщения ... надо изучать пока закоментировал, как понимаю отправляет сообщение
             //await _busControl.Publish(new MessageDto
             //{
             //    Content = $"Sonar Task {createdSonarTask.Id} with subject {createdSonarTask.Subject} is added"
             //});
 
-
-            return createdSonarTask.Id;
+            return createdSearchTask.Id;
         }
 
         /// <summary>
         /// Изменить задачу поиска.
         /// </summary>
         /// <param name="id"> Идентификатор. </param>
-        /// <param name="updatingSonarTaskDto"> ДТО задачи поиска. </param>
-        public async Task UpdateAsync(int id, UpdatingSonarTaskDto updatingSonarTaskDto)
+        /// <param name="updatingSearchTaskDto"> ДТО задачи поиска. </param>
+        public async Task UpdateAsync(long id, UpdatingSearchTaskDto updatingSearchTaskDto)
         {
-            var sonarTask = await _sonarTaskRepository.GetAsync(id, CancellationToken.None);
-            if (sonarTask == null)
+            var searchTask = await _searchTaskRepository.GetAsync(id, CancellationToken.None);
+            if (searchTask == null)
             {
                 throw new Exception($"Задача поиска с id = {id} не найден");
             }
 
-            sonarTask.Subject = updatingSonarTaskDto.Subject;
-            _sonarTaskRepository.Update(sonarTask);
-            await _sonarTaskRepository.SaveChangesAsync();
+            searchTask.Subject = updatingSearchTaskDto.Subject;
+            _searchTaskRepository.Update(searchTask);
+            await _searchTaskRepository.SaveChangesAsync();
         }
 
         /// <summary>
         /// Удалить задачу поиска.
         /// </summary>
         /// <param name="id"> Идентификатор. </param>
-        public async Task DeleteAsync(int id)
+        public async Task DeleteAsync(long id)
         {
-            var sonarTask = await _sonarTaskRepository.GetAsync(id, CancellationToken.None);
-            sonarTask.Deleted = true; 
-            await _sonarTaskRepository.SaveChangesAsync();
+            var searchTask = await _searchTaskRepository.GetAsync(id, CancellationToken.None);
+            searchTask.Deleted = true; 
+            await _searchTaskRepository.SaveChangesAsync();
         }
         
         /// <summary>
@@ -99,10 +98,10 @@ namespace Services.Implementations
         /// <param name="page"> Номер страницы. </param>
         /// <param name="pageSize"> Объем страницы. </param>
         /// <returns> Страница задач поиска. </returns>
-        public async Task<ICollection<SonarTaskDto>> GetPagedAsync(int page, int pageSize)
+        public async Task<ICollection<SearchTaskDto>> GetPagedAsync(int page, int pageSize)
         {
-            ICollection<SonarTask> entities = await _sonarTaskRepository.GetPagedAsync(page, pageSize);
-            return _mapper.Map<ICollection<SonarTask>, ICollection<SonarTaskDto>>(entities);
+            ICollection<SearchTask> entities = await _searchTaskRepository.GetPagedAsync(page, pageSize);
+            return _mapper.Map<ICollection<SearchTask>, ICollection<SearchTaskDto>>(entities);
         }
     }
 }

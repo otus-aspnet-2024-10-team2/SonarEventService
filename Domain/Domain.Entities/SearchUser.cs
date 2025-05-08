@@ -6,6 +6,4 @@
 public class SearchUser : IEntity<long>
 {
     public long Id { get; set; }
-
-    //TODO: Other properties
 }

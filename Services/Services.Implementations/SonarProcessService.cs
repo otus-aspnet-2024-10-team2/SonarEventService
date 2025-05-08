@@ -19,14 +19,14 @@ namespace Services.Implementations
     {
         private readonly IMapper _mapper;
         private readonly ISonarProcessRepository _sonarProcessRepository;
-        private readonly ISonarTaskRepository _sonarTaskRepository;
+        private readonly ISearchTaskRepository _sonarTaskRepository;
         private readonly IBusControl _busControl;
         private readonly IUnitOfWork _unitOfWork;
 
         public SonarProcessService(
             IMapper mapper,
             ISonarProcessRepository sonarProcessRepository,
-            ISonarTaskRepository sonarTaskRepository,
+            ISearchTaskRepository sonarTaskRepository,
             IUnitOfWork unitOfWork,
             IBusControl busControl)
         {
@@ -87,7 +87,7 @@ namespace Services.Implementations
             _sonarProcessRepository.Update(sonarProcess);
             await _sonarProcessRepository.SaveChangesAsync();
             //_unitOfWork.CourseRepository.Update(course);
-            var sonarTasks = _mapper.Map<IEnumerable<AttachingSonarTasksDto>, IEnumerable<SonarTask>>(updatingSonarProcessWithLSonarTasksDto.SonarTasks);
+            var sonarTasks = _mapper.Map<IEnumerable<AttachingSonarTasksDto>, IEnumerable<SearchTask>>(updatingSonarProcessWithLSonarTasksDto.SonarTasks);
             foreach (var lesson in sonarTasks)
             {
                 lesson.SonarProcessId = 100; //Не существует

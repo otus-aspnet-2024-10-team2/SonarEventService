@@ -23,7 +23,7 @@ namespace Infrastructure.EntityFramework
         /// <summary>
         /// Задачи поиска
         /// </summary>
-        public DbSet<SonarTask> SonarTasks { get; set; }
+        public DbSet<SearchTask> SearchTasks { get; set; }
 
         /// <summary>
         /// Группы поиска
@@ -62,7 +62,7 @@ namespace Infrastructure.EntityFramework
             //modelBuilder.Entity<Course>().HasIndex(c=>c.Name);
 
             modelBuilder.Entity<SonarProcess>().Property(c => c.Name).HasMaxLength(100);
-            modelBuilder.Entity<SonarTask>().Property(c => c.Subject).HasMaxLength(100);
+            modelBuilder.Entity<SearchTask>().Property(c => c.Subject).HasMaxLength(100);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

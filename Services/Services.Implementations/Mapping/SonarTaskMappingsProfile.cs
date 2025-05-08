@@ -11,9 +11,9 @@ namespace Services.Implementations.Mapping
     {
         public SonarTaskMappingsProfile()
         {
-            CreateMap<SonarTask, SonarTaskDto>();
+            CreateMap<SearchTask, SearchTaskDto>();
 
-            CreateMap<CreatingSonarTaskDto, SonarTask>()
+            CreateMap<CreatingSearchTaskDto, SearchTask>()
                 .ForMember(d => d.Id, map => map.Ignore())
                 .ForMember(d => d.Deleted, map => map.Ignore())
                 .ForMember(d => d.SonarProcess, map => map.Ignore())
@@ -21,7 +21,7 @@ namespace Services.Implementations.Mapping
                 //.ForMember(d => d.DateTime, map => map.Ignore())
                 .ForMember(d => d.Subject, map => map.MapFrom(m=>m.Subject));
             
-            CreateMap<UpdatingSonarTaskDto, SonarTask>()
+            CreateMap<UpdatingSearchTaskDto, SearchTask>()
                 .ForMember(d => d.Id, map => map.Ignore())
                 .ForMember(d => d.Deleted, map => map.Ignore())
                 .ForMember(d => d.SonarProcess, map => map.Ignore())
@@ -30,7 +30,7 @@ namespace Services.Implementations.Mapping
                 .ForMember(d => d.Subject, map => map.MapFrom(m=>m.Subject))
                 ;
             
-            CreateMap<AttachingSonarTasksDto, SonarTask>()
+            CreateMap<AttachingSonarTasksDto, SearchTask>()
                 .ForMember(d => d.Id, map => map.Ignore())
                 .ForMember(d => d.Deleted, map => map.Ignore())
                 .ForMember(d => d.SonarProcess, map => map.Ignore())

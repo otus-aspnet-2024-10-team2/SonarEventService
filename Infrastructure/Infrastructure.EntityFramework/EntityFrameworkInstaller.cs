@@ -23,7 +23,7 @@ namespace Infrastructure.EntityFramework
                             tags: new[] { "db_ef_healthcheck" },
                             customTestQuery: async (context, token) =>
                             {
-                                return await context.SonarTasks.AnyAsync(token);
+                                return await context.SearchTasks.AnyAsync(token);
                             });
 
                     #endregion

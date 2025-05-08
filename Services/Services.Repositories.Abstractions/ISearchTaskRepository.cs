@@ -7,7 +7,7 @@ namespace Services.Repositories.Abstractions
     /// <summary>
     /// Репозиторий работы с уроками.
     /// </summary>
-    public interface ISonarTaskRepository: IRepository<SonarTask, int>
+    public interface ISearchTaskRepository: IRepository<SearchTask, long>
     {
         /// <summary>
         /// Получить список задач поиска.
@@ -15,6 +15,6 @@ namespace Services.Repositories.Abstractions
         /// <param name="page"> Номер страницы. </param>
         /// <param name="itemsPerPage"> Количество элементов на странице. </param>
         /// <returns> Список задач. </returns>
-        Task<List<SonarTask>> GetPagedAsync(int page, int itemsPerPage);
+        Task<List<SearchTask>> GetPagedAsync(int page, int itemsPerPage);
     }
 }

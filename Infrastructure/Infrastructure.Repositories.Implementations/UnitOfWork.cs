@@ -10,11 +10,11 @@ namespace Infrastructure.Repositories.Implementations;
 public class UnitOfWork: IUnitOfWork
 {
     private ISonarProcessRepository _courseRepository;
-    private ISonarTaskRepository _lessonRepository;
+    private ISearchTaskRepository _lessonRepository;
     private DatabaseContext _context;
 
     public ISonarProcessRepository CourseRepository => _courseRepository;
-    public ISonarTaskRepository LessonRepository => _lessonRepository;
+    public ISearchTaskRepository LessonRepository => _lessonRepository;
 
     public UnitOfWork(DatabaseContext context)
     {

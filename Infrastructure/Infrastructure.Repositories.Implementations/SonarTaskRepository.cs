@@ -12,7 +12,7 @@ namespace Infrastructure.Repositories.Implementations
     /// <summary>
     /// Репозиторий работы с задачами поиска.
     /// </summary>
-    public class SonarTaskRepository: Repository<SonarTask, int>, ISonarTaskRepository 
+    public class SonarTaskRepository: Repository<SearchTask, long>, ISearchTaskRepository 
     {
         public SonarTaskRepository(DatabaseContext context): base(context)
         {
@@ -24,10 +24,10 @@ namespace Infrastructure.Repositories.Implementations
         /// <param name="id"> Id сущности. </param>
         /// <param name="cancellationToken"> Токен отмены </param>
         /// <returns> Задача поиска. </returns>
-        public override async Task<SonarTask> GetAsync(int id, CancellationToken cancellationToken)
+        public override async Task<SearchTask> GetAsync(long id, CancellationToken cancellationToken)
         {
             //await Task.Delay(TimeSpan.FromSeconds(20));
-            var query = _context.Set<SonarTask>().AsQueryable();
+            var query = _context.Set<SearchTask>().AsQueryable();
             query = query
                 .Where(l => l.Id == id && !l.Deleted);
 
@@ -41,7 +41,7 @@ namespace Infrastructure.Repositories.Implementations
         /// <param name="page"> Номер страницы. </param>
         /// <param name="itemsPerPage"> Количество элементов на странице. </param>
         /// <returns> Список задач поиска. </returns>
-        public async Task<List<SonarTask>> GetPagedAsync(int page, int itemsPerPage)
+        public async Task<List<SearchTask>> GetPagedAsync(int page, int itemsPerPage)
         {
             var query = GetAll().Where(l => !l.Deleted);
             return await query

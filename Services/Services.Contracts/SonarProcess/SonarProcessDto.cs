@@ -26,6 +26,6 @@ namespace Services.Contracts.SonarProcess
         /// <summary>
         /// Уроки.
         /// </summary>
-        public List<SonarTaskDto> SonarTasks { get; set; }
+        public List<SearchTaskDto> SonarTasks { get; set; }
     }
 }

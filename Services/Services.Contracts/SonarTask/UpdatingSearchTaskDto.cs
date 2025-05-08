@@ -3,7 +3,7 @@
     /// <summary>
     /// ДТО редактируемой задачи поиска.
     /// </summary>
-    public class UpdatingSonarTaskDto
+    public class UpdatingSearchTaskDto
     {
         /// <summary>
         /// Тема.

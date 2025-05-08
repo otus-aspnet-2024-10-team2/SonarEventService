@@ -7,7 +7,7 @@ namespace Services.Repositories.Abstractions
     /// </summary>
     public interface IUnitOfWork
     {
-        ISonarTaskRepository LessonRepository { get; }
+        ISearchTaskRepository LessonRepository { get; }
 
         ISonarProcessRepository CourseRepository { get; }
 

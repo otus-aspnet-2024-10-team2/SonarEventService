@@ -25,7 +25,7 @@ namespace Domain.Entities
         /// <summary>
         /// Задачи.
         /// </summary>
-        public virtual List<SonarTask> SonarTasks { get; set; }
+        public virtual List<SearchTask> SonarTasks { get; set; }
         
         /// <summary>
         /// Удалено.

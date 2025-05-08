@@ -11,9 +11,9 @@ namespace WebApi.Mapping
     {
         public SonarTaskMappingsProfile()
         {
-            CreateMap<SonarTaskDto, SonarTaskModel>();
-            CreateMap<CreatingSonarTaskModel, CreatingSonarTaskDto>();
-            CreateMap<UpdatingSonarTaskModel, UpdatingSonarTaskDto>();
+            CreateMap<SearchTaskDto, SonarTaskModel>();
+            CreateMap<CreatingSonarTaskModel, CreatingSearchTaskDto>();
+            CreateMap<UpdatingSonarTaskModel, UpdatingSearchTaskDto>();
             CreateMap<AttachingSonarTaskModel, AttachingSonarTasksDto>();
         }
     }
