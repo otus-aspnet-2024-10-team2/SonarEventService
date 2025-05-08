@@ -11,11 +11,11 @@ namespace WebApi.Mapping
     {
         public SonarProcessMappingsProfile()
         {
-            CreateMap<SonarProcessDto, SonarProcessModel>();
-            CreateMap<CreatingSonarProcessModel, CreatingSonarProcessDto>();
-            CreateMap<UpdatingSonarProcessModel, UpdatingSonarProcessDto>();
-            CreateMap<SonarProcessFilterModel, SonarProcessFilterDto>();
-            CreateMap<UpdatingSonarProcessWithSonarTasksModel, UpdatingSonarProcessWithLSonarTasksDto>();
+            CreateMap<SearchEventDto, SearchEventModel>();
+            CreateMap<CreatingSeachEventModel, CreatingSearchEventDto>();
+            CreateMap<UpdatingSearchEventModel, UpdatingSearchEventDto>();
+            CreateMap<SearchEventFilterModel, SearchEventFilterDto>();
+            CreateMap<UpdatingSearchEventWithSearchTasksModel, UpdatingSearchEventWithSeacrchTasksDto>();
         }
     }
 }

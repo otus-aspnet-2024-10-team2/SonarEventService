@@ -13,7 +13,7 @@ namespace Infrastructure.Repositories.Implementations
     /// <summary>
     /// Репозиторий работы с мероприятиями поиска.
     /// </summary>
-    public class SonarProcessRepository: Repository<SonarProcess, long>, ISonarProcessRepository
+    public class SonarProcessRepository: Repository<SearchEvent, long>, ISonarProcessRepository
     {
         public SonarProcessRepository(DatabaseContext context): base(context)
         {
@@ -25,9 +25,9 @@ namespace Infrastructure.Repositories.Implementations
         /// <param name="id"> Id сущности. </param>
         /// <param name="cancellationToken"></param>
         /// <returns> Процесс поиска. </returns>
-        public override async Task<SonarProcess> GetAsync(long id, CancellationToken cancellationToken)
+        public override async Task<SearchEvent> GetAsync(long id, CancellationToken cancellationToken)
         {
-            var query = _context.Set<SonarProcess>().AsQueryable();
+            var query = _context.Set<SearchEvent>().AsQueryable();
             return await query.SingleOrDefaultAsync(c => c.Id == id);
         }
         
@@ -36,7 +36,7 @@ namespace Infrastructure.Repositories.Implementations
         /// </summary>
         /// <param name="filterDto"> ДТО фильтра. </param>
         /// <returns> Список процессов поиска. </returns>
-        public async Task<List<SonarProcess>> GetPagedAsync(SonarProcessFilterDto filterDto)
+        public async Task<List<SearchEvent>> GetPagedAsync(SearchEventFilterDto filterDto)
         {
             var query = GetAll()
                 //.ToList().AsQueryable()

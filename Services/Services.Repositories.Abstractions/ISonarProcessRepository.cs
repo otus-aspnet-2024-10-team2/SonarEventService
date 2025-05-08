@@ -8,13 +8,13 @@ namespace Services.Repositories.Abstractions
     /// <summary>
     /// Репозиторий работы с процессами поиска
     /// </summary>
-    public interface ISonarProcessRepository: IRepository<SonarProcess, long>
+    public interface ISonarProcessRepository: IRepository<SearchEvent, long>
     {
         /// <summary>
         /// Получить постраничный список.
         /// </summary>
         /// <param name="filterDto"> ДТО фильтра. </param>
         /// <returns> Список курсов. </returns>
-        Task<List<SonarProcess>> GetPagedAsync(SonarProcessFilterDto filterDto);
+        Task<List<SearchEvent>> GetPagedAsync(SearchEventFilterDto filterDto);
     }
 }

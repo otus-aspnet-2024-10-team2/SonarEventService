@@ -3,7 +3,7 @@
     /// <summary>
     /// ДТО процесса поиска.
     /// </summary>
-    public class CreatingSonarProcessDto
+    public class CreatingSearchEventDto
     {
         /// <summary>
         /// Название.

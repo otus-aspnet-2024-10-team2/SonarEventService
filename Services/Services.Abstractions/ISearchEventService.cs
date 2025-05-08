@@ -7,20 +7,20 @@ namespace Services.Abstractions
     /// <summary>
     /// Интерфейс сервиса работы с процессами поиска.
     /// </summary>
-    public interface ISonarProcessService
+    public interface ISearchEventService
     {
         /// <summary>
         /// Получить процесс поиска.
         /// </summary>
         /// <param name="id"> Идентификатор. </param>
         /// <returns> ДТО процесса поиска. </returns>
-        Task<SonarProcessDto> GetByIdAsync(long id);
+        Task<SearchEventDto> GetByIdAsync(long id);
 
         /// <summary>
         /// Создать процесс поиска.
         /// </summary>
         /// <param name="сreatingSonarProcessDto"> ДТО создаваемого процесса поиска. </param>
-        Task<long> CreateAsync(CreatingSonarProcessDto сreatingSonarProcessDto);
+        Task<long> CreateAsync(CreatingSearchEventDto сreatingSonarProcessDto);
 
         /// <summary>
         /// Обновить процесс поиска и состав задач.
@@ -28,14 +28,14 @@ namespace Services.Abstractions
         /// </summary>
         /// <param name="id">id</param>
         /// <param name="updatingSonarProcessWithLSonarTasksDto"></param>
-        Task UpdatingWithSonarTasksAsync(long id, UpdatingSonarProcessWithLSonarTasksDto updatingSonarProcessWithLSonarTasksDto);        
+        Task UpdatingWithSonarTasksAsync(long id, UpdatingSearchEventWithSeacrchTasksDto updatingSonarProcessWithLSonarTasksDto);        
 
         /// <summary>
         /// Изменить процесс поиска.
         /// </summary>
         /// <param name="id"> Иентификатор. </param>
         /// <param name="updatingSonarProcessDto"> ДТО редактируемого процесса поиска. </param>
-        Task UpdateAsync(long id, UpdatingSonarProcessDto updatingSonarProcessDto);
+        Task UpdateAsync(long id, UpdatingSearchEventDto updatingSonarProcessDto);
 
         /// <summary>
         /// Удалить процесс поиска.
@@ -48,6 +48,6 @@ namespace Services.Abstractions
         /// </summary>
         /// <param name="filterDto"> ДТО фильтра. </param>
         /// <returns> Список процессов поиска. </returns>
-        Task<ICollection<SonarProcessDto>> GetPagedAsync(SonarProcessFilterDto filterDto);
+        Task<ICollection<SearchEventDto>> GetPagedAsync(SearchEventFilterDto filterDto);
     }
 }

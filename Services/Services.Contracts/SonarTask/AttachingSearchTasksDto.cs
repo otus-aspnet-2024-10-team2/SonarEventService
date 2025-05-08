@@ -3,7 +3,7 @@
     /// <summary>
     /// ДТО задачи поиска.
     /// </summary>
-    public class AttachingSonarTasksDto
+    public class AttachingSearchTasksDto
     {
         /// <summary>
         /// Тема.

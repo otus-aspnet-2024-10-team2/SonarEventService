@@ -14,7 +14,7 @@ namespace WebApi.Mapping
             CreateMap<SearchTaskDto, SearchTaskModel>();
             CreateMap<CreatingSearchTaskModel, CreatingSearchTaskDto>();
             CreateMap<UpdatingSearchTaskModel, UpdatingSearchTaskDto>();
-            CreateMap<AttachingSearchTaskModel, AttachingSonarTasksDto>();
+            CreateMap<AttachingSearchTaskModel, AttachingSearchTasksDto>();
         }
     }
 }

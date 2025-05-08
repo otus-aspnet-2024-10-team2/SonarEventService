@@ -3,7 +3,7 @@
     /// <summary>
     /// Модель создаваемого процесса поиска.
     /// </summary>
-    public class CreatingSonarProcessModel
+    public class CreatingSeachEventModel
     {
         /// <summary>
         /// Название.

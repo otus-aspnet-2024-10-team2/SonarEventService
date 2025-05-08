@@ -16,25 +16,25 @@ namespace Services.Implementations.Mapping
             CreateMap<CreatingSearchTaskDto, SearchTask>()
                 .ForMember(d => d.Id, map => map.Ignore())
                 .ForMember(d => d.Deleted, map => map.Ignore())
-                .ForMember(d => d.SonarProcess, map => map.Ignore())
-                .ForMember(d => d.SonarProcessId, map => map.Ignore())
+                .ForMember(d => d.SearchEvent, map => map.Ignore())
+                .ForMember(d => d.SearchEventId, map => map.Ignore())
                 //.ForMember(d => d.DateTime, map => map.Ignore())
                 .ForMember(d => d.Subject, map => map.MapFrom(m=>m.Subject));
             
             CreateMap<UpdatingSearchTaskDto, SearchTask>()
                 .ForMember(d => d.Id, map => map.Ignore())
                 .ForMember(d => d.Deleted, map => map.Ignore())
-                .ForMember(d => d.SonarProcess, map => map.Ignore())
-                .ForMember(d => d.SonarProcessId, map => map.Ignore())
+                .ForMember(d => d.SearchEvent, map => map.Ignore())
+                .ForMember(d => d.SearchEventId, map => map.Ignore())
                 //.ForMember(d => d.DateTime, map => map.Ignore())
                 .ForMember(d => d.Subject, map => map.MapFrom(m=>m.Subject))
                 ;
             
-            CreateMap<AttachingSonarTasksDto, SearchTask>()
+            CreateMap<AttachingSearchTasksDto, SearchTask>()
                 .ForMember(d => d.Id, map => map.Ignore())
                 .ForMember(d => d.Deleted, map => map.Ignore())
-                .ForMember(d => d.SonarProcess, map => map.Ignore())
-                .ForMember(d => d.SonarProcessId, map => map.Ignore())
+                .ForMember(d => d.SearchEvent, map => map.Ignore())
+                .ForMember(d => d.SearchEventId, map => map.Ignore())
                 //.ForMember(d => d.DateTime, map => map.Ignore())
                 .ForMember(d => d.Subject, map => map.MapFrom(m=>m.Subject))
                 ;

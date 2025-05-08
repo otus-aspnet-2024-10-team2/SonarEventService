@@ -3,7 +3,7 @@
     /// <summary>
     /// Модель редактируемого процесса поиска.
     /// </summary>
-    public class UpdatingSonarProcessModel
+    public class UpdatingSearchEventModel
     {
         /// <summary>
         /// Название.

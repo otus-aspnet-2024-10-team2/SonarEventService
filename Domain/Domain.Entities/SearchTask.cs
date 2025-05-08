@@ -18,12 +18,12 @@
         /// <summary>
         /// процесс поиска.
         /// </summary>
-        public virtual SonarProcess SonarProcess { get; set; }
+        public virtual SearchEvent SearchEvent { get; set; }
 
         /// <summary>
         /// Id процесса поиска.
         /// </summary>
-        public long SonarProcessId { get; set; }
+        public long SearchEventId { get; set; }
 
         /// <summary>
         /// Удалено.

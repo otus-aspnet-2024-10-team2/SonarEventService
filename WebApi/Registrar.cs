@@ -28,7 +28,7 @@ namespace WebApi
         private static IServiceCollection InstallServices(this IServiceCollection serviceCollection)
         {
             serviceCollection
-                .AddTransient<ISonarProcessService, SonarProcessService>()
+                .AddTransient<ISearchEventService, SonarProcessService>()
                 .AddTransient<ISearchTaskService, SearchTaskService>()
                 .AddTransient<IGroupMemberService, GroupMemberService>()
                 .AddTransient<ISearchGroupService, SearchGroupService>();

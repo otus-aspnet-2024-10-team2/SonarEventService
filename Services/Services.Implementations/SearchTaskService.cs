@@ -51,7 +51,7 @@ namespace Services.Implementations
         public async Task<long> CreateAsync(CreatingSearchTaskDto сreatingSearchTaskDto)
         {
             var searchTask = _mapper.Map<CreatingSearchTaskDto, SearchTask>(сreatingSearchTaskDto);
-            searchTask.SonarProcessId = сreatingSearchTaskDto.SonarProcessId;
+            searchTask.SearchEventId = сreatingSearchTaskDto.SonarProcessId;
             var createdSearchTask = await _searchTaskRepository.AddAsync(searchTask);
             await _searchTaskRepository.SaveChangesAsync();
             // здесь как понял идет публикация сообщения ... надо изучать пока закоментировал, как понимаю отправляет сообщение

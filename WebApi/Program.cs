@@ -37,7 +37,7 @@ namespace WebApi
             using (var scope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
                 var context = scope.ServiceProvider.GetService<DatabaseContext>();
-                var course = new SonarProcess()
+                var course = new SearchEvent()
                 {
                     //...
                 };

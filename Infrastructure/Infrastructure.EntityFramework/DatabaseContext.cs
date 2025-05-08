@@ -18,7 +18,7 @@ namespace Infrastructure.EntityFramework
         /// <summary>
         /// Процессы поиска
         /// </summary>
-        public DbSet<SonarProcess> SonarProcess { get; set; }
+        public DbSet<SearchEvent> SonarProcess { get; set; }
         
         /// <summary>
         /// Задачи поиска
@@ -39,9 +39,9 @@ namespace Infrastructure.EntityFramework
         {
             base.OnModelCreating(modelBuilder);            
             
-            modelBuilder.Entity<SonarProcess>()
+            modelBuilder.Entity<SearchEvent>()
                 .HasMany(u => u.SearchTasks)
-                .WithOne(c=> c.SonarProcess)
+                .WithOne(c=> c.SearchEvent)
                 .IsRequired();
             
         //    modelBuilder.Entity<>()
@@ -61,7 +61,7 @@ namespace Infrastructure.EntityFramework
 
             //modelBuilder.Entity<Course>().HasIndex(c=>c.Name);
 
-            modelBuilder.Entity<SonarProcess>().Property(c => c.Name).HasMaxLength(100);
+            modelBuilder.Entity<SearchEvent>().Property(c => c.Name).HasMaxLength(100);
             modelBuilder.Entity<SearchTask>().Property(c => c.Subject).HasMaxLength(100);
         }
 

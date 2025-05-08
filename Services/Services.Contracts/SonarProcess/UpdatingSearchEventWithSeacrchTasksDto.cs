@@ -1,18 +1,13 @@
 ﻿using System.Collections.Generic;
-using WebApi.Models.SearchTask;
+using Services.Contracts.SonarTask;
 
-namespace WebApi.Models.SonarProcess
+namespace Services.Contracts.SonarProcess
 {
     /// <summary>
-    /// Модель курса.
+    /// ДТО обновления процесса поиска с изменением состава задач.
     /// </summary>
-    public class SonarProcessModel
+    public class UpdatingSearchEventWithSeacrchTasksDto
     {
-        /// <summary>
-        /// Id.
-        /// </summary>
-        public long Id { get; set; }
-
         /// <summary>
         /// Название.
         /// </summary>
@@ -24,8 +19,8 @@ namespace WebApi.Models.SonarProcess
         //public decimal Price { get; set; }
 
         /// <summary>
-        /// Задачи поиска.
+        /// Уроки
         /// </summary>
-        public List<SearchTaskModel> SearchTasks { get; set; }
+        public IEnumerable<AttachingSearchTasksDto> SonarTasks { get; set; }
     }
 }

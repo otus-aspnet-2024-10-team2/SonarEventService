@@ -1,6 +1,6 @@
-namespace WebApi.Models.SonarProcess;
+namespace Services.Contracts.SonarProcess;
 
-public class SonarProcessFilterModel
+public class SearchEventFilterDto
 {
     public string Name { get; set; }
 

@@ -11,19 +11,19 @@ namespace Services.Implementations.Mapping
     {
         public SonarProcessMappingsProfile()
         {
-            CreateMap<SonarProcess, SonarProcessDto>();
+            CreateMap<SearchEvent, SearchEventDto>();
             
-            CreateMap<CreatingSonarProcessDto, SonarProcess>()
+            CreateMap<CreatingSearchEventDto, SearchEvent>()
                 .ForMember(d => d.Id, map => map.Ignore())
                 .ForMember(d => d.Deleted, map => map.Ignore())
                 .ForMember(d => d.SearchTasks, map => map.Ignore());
             
-            CreateMap<UpdatingSonarProcessDto, SonarProcess>()
+            CreateMap<UpdatingSearchEventDto, SearchEvent>()
                 .ForMember(d => d.Id, map => map.Ignore())
                 .ForMember(d => d.Deleted, map => map.Ignore())
                 .ForMember(d => d.SearchTasks, map => map.Ignore());
 
-            CreateMap<UpdatingSonarProcessWithLSonarTasksDto, SonarProcess>()
+            CreateMap<UpdatingSearchEventWithSeacrchTasksDto, SearchEvent>()
                 .ForMember(d => d.Id, map => map.Ignore())
                 .ForMember(d => d.Deleted, map => map.Ignore())
                 .ForMember(d => d.SearchTasks, map => map.Ignore());

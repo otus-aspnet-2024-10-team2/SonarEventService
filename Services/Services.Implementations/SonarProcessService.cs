@@ -15,7 +15,7 @@ namespace Services.Implementations
     /// <summary>
     /// Cервис работы с процессами поиска.
     /// </summary>
-    public class SonarProcessService : ISonarProcessService
+    public class SonarProcessService : ISearchEventService
     {
         private readonly IMapper _mapper;
         private readonly ISonarProcessRepository _sonarProcessRepository;
@@ -42,10 +42,10 @@ namespace Services.Implementations
         /// </summary>
         /// <param name="id"> Идентификатор. </param>
         /// <returns> ДТО курса. </returns>
-        public async Task<SonarProcessDto> GetByIdAsync(long id)
+        public async Task<SearchEventDto> GetByIdAsync(long id)
         {
             var course = await _sonarProcessRepository.GetAsync(id, CancellationToken.None);
-            return _mapper.Map<SonarProcess, SonarProcessDto>(course);
+            return _mapper.Map<SearchEvent, SearchEventDto>(course);
         }
 
         /// <summary>
@@ -53,9 +53,9 @@ namespace Services.Implementations
         /// </summary>
         /// <param name="creatingSonarProcessDto"> ДТО создаваемого процесса. </param>
         /// <returns> Идентификатор. </returns>
-        public async Task<long> CreateAsync(CreatingSonarProcessDto creatingSonarProcessDto)
+        public async Task<long> CreateAsync(CreatingSearchEventDto creatingSonarProcessDto)
         {
-            var course = _mapper.Map<CreatingSonarProcessDto, SonarProcess>(creatingSonarProcessDto);
+            var course = _mapper.Map<CreatingSearchEventDto, SearchEvent>(creatingSonarProcessDto);
             var createdSonarProcess = await _sonarProcessRepository.AddAsync(course);
             await _sonarProcessRepository.SaveChangesAsync();
             /*
@@ -73,7 +73,7 @@ namespace Services.Implementations
         /// </summary>
         /// <param name="updatingSonarProcessWithLSonarTasksDto"> ДТО редактируемого процесса. </param>
         /// <param name="id"> Id </param>
-        public async Task UpdatingWithSonarTasksAsync(long id, UpdatingSonarProcessWithLSonarTasksDto updatingSonarProcessWithLSonarTasksDto)
+        public async Task UpdatingWithSonarTasksAsync(long id, UpdatingSearchEventWithSeacrchTasksDto updatingSonarProcessWithLSonarTasksDto)
         {
             //var course = await _unitOfWork.CourseRepository.GetAsync(id, CancellationToken.None);
             var sonarProcess = await _sonarProcessRepository.GetAsync(id, CancellationToken.None);
@@ -87,10 +87,10 @@ namespace Services.Implementations
             _sonarProcessRepository.Update(sonarProcess);
             await _sonarProcessRepository.SaveChangesAsync();
             //_unitOfWork.CourseRepository.Update(course);
-            var sonarTasks = _mapper.Map<IEnumerable<AttachingSonarTasksDto>, IEnumerable<SearchTask>>(updatingSonarProcessWithLSonarTasksDto.SonarTasks);
+            var sonarTasks = _mapper.Map<IEnumerable<AttachingSearchTasksDto>, IEnumerable<SearchTask>>(updatingSonarProcessWithLSonarTasksDto.SonarTasks);
             foreach (var lesson in sonarTasks)
             {
-                lesson.SonarProcessId = 100; //Не существует
+                lesson.SearchEventId = 100; //Не существует
                 await _sonarTaskRepository.AddAsync(lesson);
                 //await _unitOfWork.LessonRepository.AddAsync(lesson);
             }
@@ -104,7 +104,7 @@ namespace Services.Implementations
         /// </summary>
         /// <param name="id"> Идентификатор. </param>
         /// <param name="updatingCourseDto"> ДТО редактируемого процесса поиска. </param>
-        public async Task UpdateAsync(long id, UpdatingSonarProcessDto updatingCourseDto)
+        public async Task UpdateAsync(long id, UpdatingSearchEventDto updatingCourseDto)
         {
             var sonarProcess = await _sonarProcessRepository.GetAsync(id, CancellationToken.None);
             if (sonarProcess == null)
@@ -134,10 +134,10 @@ namespace Services.Implementations
         /// </summary>
         /// <param name="filterDto"> ДТО фильтра. </param>
         /// <returns> Список поисков. </returns>
-        public async Task<ICollection<SonarProcessDto>> GetPagedAsync(SonarProcessFilterDto filterDto)
+        public async Task<ICollection<SearchEventDto>> GetPagedAsync(SearchEventFilterDto filterDto)
         {
-            ICollection<SonarProcess> entities = await _sonarProcessRepository.GetPagedAsync(filterDto);
-            return _mapper.Map<ICollection<SonarProcess>, ICollection<SonarProcessDto>>(entities);
+            ICollection<SearchEvent> entities = await _sonarProcessRepository.GetPagedAsync(filterDto);
+            return _mapper.Map<ICollection<SearchEvent>, ICollection<SearchEventDto>>(entities);
         }
     }
 }

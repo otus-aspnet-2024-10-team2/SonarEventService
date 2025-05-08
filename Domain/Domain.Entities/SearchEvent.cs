@@ -5,15 +5,15 @@ namespace Domain.Entities
     /// <summary>
     /// Мероприятие поиска животного
     /// </summary>
-    public class SonarProcess: IEntity<long>
+    public class SearchEvent: IEntity<long>
     {
         /// <summary>
-        /// Идентификатор.
+        /// Идентификатор
         /// </summary>
         public long Id { get; set; }
 
         /// <summary>
-        /// Наименование.
+        /// Наименование мероприятия
         /// </summary>
         public string Name { get; set; }
 
@@ -28,7 +28,7 @@ namespace Domain.Entities
         public virtual List<SearchTask> SearchTasks { get; set; }
         
         /// <summary>
-        /// Удалено.
+        /// Удалено
         /// </summary>
         public bool Deleted { get; set; }
     }
