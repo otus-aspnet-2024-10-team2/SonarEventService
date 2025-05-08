@@ -14,13 +14,13 @@ namespace Services.Abstractions
         /// </summary>
         /// <param name="id"> Идентификатор. </param>
         /// <returns> ДТО процесса поиска. </returns>
-        Task<SonarProcessDto> GetByIdAsync(int id);
+        Task<SonarProcessDto> GetByIdAsync(long id);
 
         /// <summary>
         /// Создать процесс поиска.
         /// </summary>
         /// <param name="сreatingSonarProcessDto"> ДТО создаваемого процесса поиска. </param>
-        Task<int> CreateAsync(CreatingSonarProcessDto сreatingSonarProcessDto);
+        Task<long> CreateAsync(CreatingSonarProcessDto сreatingSonarProcessDto);
 
         /// <summary>
         /// Обновить процесс поиска и состав задач.
@@ -28,20 +28,20 @@ namespace Services.Abstractions
         /// </summary>
         /// <param name="id">id</param>
         /// <param name="updatingSonarProcessWithLSonarTasksDto"></param>
-        Task UpdatingWithSonarTasksAsync(int id, UpdatingSonarProcessWithLSonarTasksDto updatingSonarProcessWithLSonarTasksDto);        
+        Task UpdatingWithSonarTasksAsync(long id, UpdatingSonarProcessWithLSonarTasksDto updatingSonarProcessWithLSonarTasksDto);        
 
         /// <summary>
         /// Изменить процесс поиска.
         /// </summary>
         /// <param name="id"> Иентификатор. </param>
         /// <param name="updatingSonarProcessDto"> ДТО редактируемого процесса поиска. </param>
-        Task UpdateAsync(int id, UpdatingSonarProcessDto updatingSonarProcessDto);
+        Task UpdateAsync(long id, UpdatingSonarProcessDto updatingSonarProcessDto);
 
         /// <summary>
         /// Удалить процесс поиска.
         /// </summary>
         /// <param name="id"> Идентификатор. </param>
-        Task DeleteAsync(int id);
+        Task DeleteAsync(long id);
         
         /// <summary>
         /// Получить постраничный список.

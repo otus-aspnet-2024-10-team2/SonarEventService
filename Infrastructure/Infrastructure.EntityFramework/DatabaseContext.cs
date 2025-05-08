@@ -40,7 +40,7 @@ namespace Infrastructure.EntityFramework
             base.OnModelCreating(modelBuilder);            
             
             modelBuilder.Entity<SonarProcess>()
-                .HasMany(u => u.SonarTasks)
+                .HasMany(u => u.SearchTasks)
                 .WithOne(c=> c.SonarProcess)
                 .IsRequired();
             

@@ -42,7 +42,7 @@ namespace Services.Implementations
         /// </summary>
         /// <param name="id"> Идентификатор. </param>
         /// <returns> ДТО курса. </returns>
-        public async Task<SonarProcessDto> GetByIdAsync(int id)
+        public async Task<SonarProcessDto> GetByIdAsync(long id)
         {
             var course = await _sonarProcessRepository.GetAsync(id, CancellationToken.None);
             return _mapper.Map<SonarProcess, SonarProcessDto>(course);
@@ -53,7 +53,7 @@ namespace Services.Implementations
         /// </summary>
         /// <param name="creatingSonarProcessDto"> ДТО создаваемого процесса. </param>
         /// <returns> Идентификатор. </returns>
-        public async Task<int> CreateAsync(CreatingSonarProcessDto creatingSonarProcessDto)
+        public async Task<long> CreateAsync(CreatingSonarProcessDto creatingSonarProcessDto)
         {
             var course = _mapper.Map<CreatingSonarProcessDto, SonarProcess>(creatingSonarProcessDto);
             var createdSonarProcess = await _sonarProcessRepository.AddAsync(course);
@@ -73,7 +73,7 @@ namespace Services.Implementations
         /// </summary>
         /// <param name="updatingSonarProcessWithLSonarTasksDto"> ДТО редактируемого процесса. </param>
         /// <param name="id"> Id </param>
-        public async Task UpdatingWithSonarTasksAsync(int id, UpdatingSonarProcessWithLSonarTasksDto updatingSonarProcessWithLSonarTasksDto)
+        public async Task UpdatingWithSonarTasksAsync(long id, UpdatingSonarProcessWithLSonarTasksDto updatingSonarProcessWithLSonarTasksDto)
         {
             //var course = await _unitOfWork.CourseRepository.GetAsync(id, CancellationToken.None);
             var sonarProcess = await _sonarProcessRepository.GetAsync(id, CancellationToken.None);
@@ -83,7 +83,7 @@ namespace Services.Implementations
             }
 
             sonarProcess.Name = updatingSonarProcessWithLSonarTasksDto.Name;
-            sonarProcess.Price = updatingSonarProcessWithLSonarTasksDto.Price;
+            //sonarProcess.Price = updatingSonarProcessWithLSonarTasksDto.Price;
             _sonarProcessRepository.Update(sonarProcess);
             await _sonarProcessRepository.SaveChangesAsync();
             //_unitOfWork.CourseRepository.Update(course);
@@ -104,7 +104,7 @@ namespace Services.Implementations
         /// </summary>
         /// <param name="id"> Идентификатор. </param>
         /// <param name="updatingCourseDto"> ДТО редактируемого процесса поиска. </param>
-        public async Task UpdateAsync(int id, UpdatingSonarProcessDto updatingCourseDto)
+        public async Task UpdateAsync(long id, UpdatingSonarProcessDto updatingCourseDto)
         {
             var sonarProcess = await _sonarProcessRepository.GetAsync(id, CancellationToken.None);
             if (sonarProcess == null)
@@ -113,7 +113,7 @@ namespace Services.Implementations
             }
 
             sonarProcess.Name = updatingCourseDto.Name;
-            sonarProcess.Price = updatingCourseDto.Price;
+            //sonarProcess.Price = updatingCourseDto.Price;
             _sonarProcessRepository.Update(sonarProcess);
             await _sonarProcessRepository.SaveChangesAsync();
         }
@@ -122,7 +122,7 @@ namespace Services.Implementations
         /// Удалить процесс поиска.
         /// </summary>
         /// <param name="id"> Идентификатор. </param>
-        public async Task DeleteAsync(int id)
+        public async Task DeleteAsync(long id)
         {
             var sonarProcess = await _sonarProcessRepository.GetAsync(id, CancellationToken.None);
             sonarProcess.Deleted = true; 

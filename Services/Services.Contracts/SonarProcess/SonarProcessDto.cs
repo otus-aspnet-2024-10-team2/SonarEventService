@@ -11,21 +11,21 @@ namespace Services.Contracts.SonarProcess
         /// <summary>
         /// Id.
         /// </summary>
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         /// <summary>
         /// Название.
         /// </summary>
         public string Name { get; set; }
 
-        /// <summary>
-        /// Стоимость.
-        /// </summary>
-        public decimal Price { get; set; }
+        ///// <summary>
+        ///// Стоимость.
+        ///// </summary>
+        //public decimal Price { get; set; }
 
         /// <summary>
-        /// Уроки.
+        /// Задачи
         /// </summary>
-        public List<SearchTaskDto> SonarTasks { get; set; }
+        public List<SearchTaskDto> SearchTasks { get; set; }
     }
 }

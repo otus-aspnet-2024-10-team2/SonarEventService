@@ -3,29 +3,29 @@
 namespace Domain.Entities
 {
     /// <summary>
-    /// Курс.
+    /// Мероприятие поиска животного
     /// </summary>
-    public class SonarProcess: IEntity<int>
+    public class SonarProcess: IEntity<long>
     {
         /// <summary>
         /// Идентификатор.
         /// </summary>
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         /// <summary>
         /// Наименование.
         /// </summary>
         public string Name { get; set; }
 
-        /// <summary>
-        /// Стоимость.
-        /// </summary>
-        public decimal Price { get; set; }
+        ///// <summary>
+        ///// Стоимость.
+        ///// </summary>
+        //public decimal Price { get; set; }
 
         /// <summary>
-        /// Задачи.
+        /// Задачи поиска 
         /// </summary>
-        public virtual List<SearchTask> SonarTasks { get; set; }
+        public virtual List<SearchTask> SearchTasks { get; set; }
         
         /// <summary>
         /// Удалено.

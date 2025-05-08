@@ -23,7 +23,7 @@
         /// <summary>
         /// Id процесса поиска.
         /// </summary>
-        public int SonarProcessId { get; set; }
+        public long SonarProcessId { get; set; }
 
         /// <summary>
         /// Удалено.

@@ -5,7 +5,7 @@ using WebApi.Models.SonarProcess;
 namespace WebApi.Mapping
 {
     /// <summary>
-    /// Профиль автомаппера для сущности курса.
+    /// Профиль автомаппера для сущности мероприятия поиска.
     /// </summary>
     public class SonarProcessMappingsProfile : Profile
     {

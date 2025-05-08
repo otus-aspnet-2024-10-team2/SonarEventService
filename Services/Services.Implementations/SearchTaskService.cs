@@ -50,9 +50,9 @@ namespace Services.Implementations
         /// <returns> Идентификатор. </returns>
         public async Task<long> CreateAsync(CreatingSearchTaskDto сreatingSearchTaskDto)
         {
-            var lesson = _mapper.Map<CreatingSearchTaskDto, SearchTask>(сreatingSearchTaskDto);
-            lesson.SonarProcessId = сreatingSearchTaskDto.SonarProcessId;
-            var createdSearchTask = await _searchTaskRepository.AddAsync(lesson);
+            var searchTask = _mapper.Map<CreatingSearchTaskDto, SearchTask>(сreatingSearchTaskDto);
+            searchTask.SonarProcessId = сreatingSearchTaskDto.SonarProcessId;
+            var createdSearchTask = await _searchTaskRepository.AddAsync(searchTask);
             await _searchTaskRepository.SaveChangesAsync();
             // здесь как понял идет публикация сообщения ... надо изучать пока закоментировал, как понимаю отправляет сообщение
             //await _busControl.Publish(new MessageDto

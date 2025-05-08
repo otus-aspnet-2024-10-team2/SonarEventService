@@ -11,9 +11,9 @@ using Services.Contracts.SonarProcess;
 namespace Infrastructure.Repositories.Implementations
 {
     /// <summary>
-    /// Репозиторий работы с процессами.
+    /// Репозиторий работы с мероприятиями поиска.
     /// </summary>
-    public class SonarProcessRepository: Repository<SonarProcess, int>, ISonarProcessRepository
+    public class SonarProcessRepository: Repository<SonarProcess, long>, ISonarProcessRepository
     {
         public SonarProcessRepository(DatabaseContext context): base(context)
         {
@@ -25,7 +25,7 @@ namespace Infrastructure.Repositories.Implementations
         /// <param name="id"> Id сущности. </param>
         /// <param name="cancellationToken"></param>
         /// <returns> Процесс поиска. </returns>
-        public override async Task<SonarProcess> GetAsync(int id, CancellationToken cancellationToken)
+        public override async Task<SonarProcess> GetAsync(long id, CancellationToken cancellationToken)
         {
             var query = _context.Set<SonarProcess>().AsQueryable();
             return await query.SingleOrDefaultAsync(c => c.Id == id);
@@ -47,10 +47,10 @@ namespace Infrastructure.Repositories.Implementations
                 query = query.Where(c => c.Name == filterDto.Name);
             }
             
-            if (filterDto.Price.HasValue && filterDto.Price != 0)
-            {
-                query = query.Where(c => c.Price == filterDto.Price);
-            }
+            //if (filterDto.Price.HasValue && filterDto.Price != 0)
+            //{
+            //    query = query.Where(c => c.Price == filterDto.Price);
+            //}
 
             query = query
                 .Skip((filterDto.Page - 1) * filterDto.ItemsPerPage)

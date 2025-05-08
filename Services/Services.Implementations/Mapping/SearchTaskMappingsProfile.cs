@@ -7,9 +7,9 @@ namespace Services.Implementations.Mapping
     /// <summary>
     /// Профиль автомаппера для сущности задачи поиска.
     /// </summary>
-    public class SonarTaskMappingsProfile : Profile
+    public class SearchTaskMappingsProfile : Profile
     {
-        public SonarTaskMappingsProfile()
+        public SearchTaskMappingsProfile()
         {
             CreateMap<SearchTask, SearchTaskDto>();
 

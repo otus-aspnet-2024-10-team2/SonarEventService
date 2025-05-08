@@ -8,7 +8,7 @@ namespace Services.Repositories.Abstractions
     /// <summary>
     /// Репозиторий работы с процессами поиска
     /// </summary>
-    public interface ISonarProcessRepository: IRepository<SonarProcess, int>
+    public interface ISonarProcessRepository: IRepository<SonarProcess, long>
     {
         /// <summary>
         /// Получить постраничный список.

@@ -16,17 +16,17 @@ namespace Services.Implementations.Mapping
             CreateMap<CreatingSonarProcessDto, SonarProcess>()
                 .ForMember(d => d.Id, map => map.Ignore())
                 .ForMember(d => d.Deleted, map => map.Ignore())
-                .ForMember(d => d.SonarTasks, map => map.Ignore());
+                .ForMember(d => d.SearchTasks, map => map.Ignore());
             
             CreateMap<UpdatingSonarProcessDto, SonarProcess>()
                 .ForMember(d => d.Id, map => map.Ignore())
                 .ForMember(d => d.Deleted, map => map.Ignore())
-                .ForMember(d => d.SonarTasks, map => map.Ignore());
+                .ForMember(d => d.SearchTasks, map => map.Ignore());
 
             CreateMap<UpdatingSonarProcessWithLSonarTasksDto, SonarProcess>()
                 .ForMember(d => d.Id, map => map.Ignore())
                 .ForMember(d => d.Deleted, map => map.Ignore())
-                .ForMember(d => d.SonarTasks, map => map.Ignore());
+                .ForMember(d => d.SearchTasks, map => map.Ignore());
         }
     }
 }
