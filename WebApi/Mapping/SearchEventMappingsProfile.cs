@@ -7,9 +7,9 @@ namespace WebApi.Mapping
     /// <summary>
     /// Профиль автомаппера для сущности мероприятия поиска.
     /// </summary>
-    public class SonarProcessMappingsProfile : Profile
+    public class SearchEventMappingsProfile : Profile
     {
-        public SonarProcessMappingsProfile()
+        public SearchEventMappingsProfile()
         {
             CreateMap<SearchEventDto, SearchEventModel>();
             CreateMap<CreatingSeachEventModel, CreatingSearchEventDto>();
