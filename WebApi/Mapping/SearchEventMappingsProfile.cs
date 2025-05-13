@@ -1,6 +1,6 @@
 using AutoMapper;
 using Services.Contracts.SonarProcess;
-using WebApi.Models.SonarProcess;
+using WebApi.Models.SearchEvent;
 
 namespace WebApi.Mapping
 {

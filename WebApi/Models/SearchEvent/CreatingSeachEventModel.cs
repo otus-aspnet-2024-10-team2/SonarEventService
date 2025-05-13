@@ -1,9 +1,9 @@
-﻿namespace WebApi.Models.SonarProcess
+﻿namespace WebApi.Models.SearchEvent
 {
     /// <summary>
-    /// Модель редактируемого процесса поиска.
+    /// Модель создаваемого процесса поиска.
     /// </summary>
-    public class UpdatingSearchEventModel
+    public class CreatingSeachEventModel
     {
         /// <summary>
         /// Название.

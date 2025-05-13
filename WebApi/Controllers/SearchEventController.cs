@@ -5,7 +5,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Services.Contracts.SonarProcess;
-using WebApi.Models.SonarProcess;
+using WebApi.Models.SearchEvent;
 
 namespace WebApi.Controllers
 {

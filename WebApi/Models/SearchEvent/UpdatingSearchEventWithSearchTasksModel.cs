@@ -1,18 +1,13 @@
 ﻿using System.Collections.Generic;
 using WebApi.Models.SearchTask;
 
-namespace WebApi.Models.SonarProcess
+namespace WebApi.Models.SearchEvent
 {
     /// <summary>
-    /// Модель курса.
+    /// Модель обновления процесса поиска с изменением состава задач.
     /// </summary>
-    public class SearchEventModel
+    public class UpdatingSearchEventWithSearchTasksModel
     {
-        /// <summary>
-        /// Id.
-        /// </summary>
-        public long Id { get; set; }
-
         /// <summary>
         /// Название.
         /// </summary>
@@ -26,6 +21,6 @@ namespace WebApi.Models.SonarProcess
         /// <summary>
         /// Задачи поиска.
         /// </summary>
-        public List<SearchTaskModel> SearchTasks { get; set; }
+        public IEnumerable<AttachingSearchTaskModel> SonarTasks { get; set; }
     }
 }

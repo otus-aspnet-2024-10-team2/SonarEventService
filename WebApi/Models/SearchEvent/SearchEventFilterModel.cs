@@ -1,4 +1,4 @@
-namespace WebApi.Models.SonarProcess;
+namespace WebApi.Models.SearchEvent;
 
 public class SearchEventFilterModel
 {
