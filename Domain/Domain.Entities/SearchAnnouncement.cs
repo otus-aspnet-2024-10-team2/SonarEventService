@@ -24,12 +24,12 @@ public class SearchAnnouncement : IEntity<long>
     public long OwnerId { get; set; }
 
     /// <summary>
-    /// Описание объявления
+    /// Описание объявления (1024 знаков)
     /// </summary>
     public string Description { get; set; }
 
     /// <summary>
-    /// Последнее известное место нахождения
+    /// Последнее известное место нахождения (500 знаков)
     /// </summary>
     public string LastSeenLocation { get; set; }
 

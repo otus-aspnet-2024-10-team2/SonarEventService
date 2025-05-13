@@ -25,7 +25,7 @@ public class GroupMember : IEntity<long>
     public long UserId { get; set; }
 
     /// <summary>
-    /// Роль пользователя в группе (например: лидер, доброволец)
+    /// Роль пользователя в группе (например: лидер, доброволец) (50 знаков)
     /// </summary>
     public string Role { get; set; }
 

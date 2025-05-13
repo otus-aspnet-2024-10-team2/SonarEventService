@@ -26,12 +26,12 @@ namespace Domain.Entities
         public long CreatedBy { get; set; }
 
         /// <summary>
-        /// Описание мероприятия
+        /// Описание мероприятия (1024 знака)
         /// </summary>
         public string Description { get; set; }
 
         /// <summary>
-        /// Место проведения мероприятия
+        /// Место проведения мероприятия (500 знаков)
         /// </summary>
         public string Location { get; set; }
 

@@ -24,7 +24,7 @@ namespace Domain.Entities
         /// <summary>
         /// Идентификатор пользователя, которому назначена задача
         /// </summary>
-        [Column("AssignedTo")]
+        //[Column("AssignedTo")]
         public long AssignedToId { get; set; }
 
         /// <summary>

@@ -60,6 +60,7 @@ namespace Infrastructure.EntityFramework
         {
             base.OnModelCreating(modelBuilder);
 
+            // связи сущностей
 
             // Animal → User (OwnerId)
             modelBuilder.Entity<Animal>()
@@ -151,6 +152,62 @@ namespace Infrastructure.EntityFramework
                 .WithMany(u => u.AssignedTasks)
                 .HasForeignKey(st => st.AssignedToId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            // индексы сущностей
+            modelBuilder.Entity<Animal>().HasIndex(c=>c.OwnerId);
+
+            modelBuilder.Entity<SearchAnnouncement>().HasIndex(c => c.OwnerId);
+            modelBuilder.Entity<SearchAnnouncement>().HasIndex(c => c.Status);
+
+            modelBuilder.Entity<SearchRequest>().HasIndex(c => c.AnnouncementId);
+            modelBuilder.Entity<SearchRequest>().HasIndex(c => c.CoordinatorId);
+            modelBuilder.Entity<SearchRequest>().HasIndex(c => c.Status);
+
+            modelBuilder.Entity<SearchGroup>().HasIndex(c => c.RequestId);
+            modelBuilder.Entity<SearchGroup>().HasIndex(c => c.LeaderId);
+
+            modelBuilder.Entity<GroupMember>().HasIndex(c => c.UserId);
+            modelBuilder.Entity<GroupMember>().HasIndex(c => c.GroupId);
+
+            modelBuilder.Entity<SearchEvent>().HasIndex(c => c.RequestId);
+            modelBuilder.Entity<SearchEvent>().HasIndex(c => c.CreatedBy);
+            modelBuilder.Entity<SearchEvent>().HasIndex(c => c.StartTime);
+            modelBuilder.Entity<SearchEvent>().HasIndex(c => c.Status);
+
+            modelBuilder.Entity<SearchTask>().HasIndex(c => c.EventId);
+            modelBuilder.Entity<SearchTask>().HasIndex(c => c.AssignedToId);
+            modelBuilder.Entity<SearchTask>().HasIndex(c => c.Status);
+
+            // размеры текстовых полей
+            modelBuilder.Entity<Animal>().Property(c => c.Name).HasMaxLength(50);
+            modelBuilder.Entity<Animal>().Property(c => c.Species).HasMaxLength(50);
+            modelBuilder.Entity<Animal>().Property(c => c.Breed).HasMaxLength(50);
+            modelBuilder.Entity<Animal>().Property(c => c.Color).HasMaxLength(50);
+            modelBuilder.Entity<Animal>().Property(c => c.ChipNumber).HasMaxLength(50);
+            modelBuilder.Entity<Animal>().Property(c => c.LastSeenLocation).HasMaxLength(500);
+            modelBuilder.Entity<Animal>().Property(c => c.Description).HasMaxLength(1024);
+            modelBuilder.Entity<Animal>().Property(c => c.PhotoUrl).HasMaxLength(1024);
+
+            modelBuilder.Entity<GroupMember>().Property(c => c.Role).HasMaxLength(50);
+
+            modelBuilder.Entity<SearchAnnouncement>().Property(c => c.Description).HasMaxLength(1024);
+            modelBuilder.Entity<SearchAnnouncement>().Property(c => c.LastSeenLocation).HasMaxLength(500);
+            modelBuilder.Entity<SearchAnnouncement>().Property(c => c.Status).HasMaxLength(50);
+
+            modelBuilder.Entity<SearchEvent>().Property(c => c.Description).HasMaxLength(1024);
+            modelBuilder.Entity<SearchEvent>().Property(c => c.Location).HasMaxLength(500);
+            modelBuilder.Entity<SearchEvent>().Property(c => c.Status).HasMaxLength(50);
+
+            modelBuilder.Entity<SearchRequest>().Property(c => c.Description).HasMaxLength(1024);
+            modelBuilder.Entity<SearchRequest>().Property(c => c.Status).HasMaxLength(50);
+
+            modelBuilder.Entity<SearchTask>().Property(c => c.Title).HasMaxLength(100);
+            modelBuilder.Entity<SearchTask>().Property(c => c.Description).HasMaxLength(1024);
+            modelBuilder.Entity<SearchTask>().Property(c => c.Status).HasMaxLength(50);
+
+            modelBuilder.Entity<User>().Property(c => c.Username).HasMaxLength(50);
+            modelBuilder.Entity<User>().Property(c => c.ShortName).HasMaxLength(50);
+            modelBuilder.Entity<User>().Property(c => c.FullName).HasMaxLength(100);
 
             // VDV: Прошлое удалить после стабилизации
 

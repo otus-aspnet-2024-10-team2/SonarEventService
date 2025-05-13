@@ -14,22 +14,22 @@ public class Animal : IEntity<long>
     public long Id { get; set; }
 
     /// <summary>
-    /// Имя животного
+    /// Имя животного (50 знаков)
     /// </summary>
     public string Name { get; set; }
 
     /// <summary>
-    /// Вид животного (например: кошка, собака)
+    /// Вид животного (например: кошка, собака) (50 знаков)
     /// </summary>
     public string Species { get; set; }
 
     /// <summary>
-    /// Порода животного
+    /// Порода животного (50 знаков)
     /// </summary>
     public string Breed { get; set; }
 
     /// <summary>
-    /// Цвет / окрас животного
+    /// Цвет / окрас животного (50 знаков)
     /// </summary>
     public string Color { get; set; }
 
@@ -44,17 +44,17 @@ public class Animal : IEntity<long>
     public long OwnerId { get; set; }
 
     /// <summary>
-    /// Последнее известное место нахождения
+    /// Последнее известное место нахождения (500 знаков)
     /// </summary>
     public string LastSeenLocation { get; set; }
 
     /// <summary>
-    /// Описание особенностей животного
+    /// Описание особенностей животного (1024 знака)
     /// </summary>
     public string Description { get; set; }
 
     /// <summary>
-    /// Ссылка на фото животного
+    /// Ссылка на фото животного (1024 знака)
     /// </summary>
     public string PhotoUrl { get; set; }
 

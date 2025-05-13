@@ -124,9 +124,6 @@ VALUES
 (4, 4, 'Кот Барсик потерялся, но информация оказалась ошибочной.', 'Квартира на проспекте', 'отклонен'),
 (8, 8, 'Кролик Лютик потерялся, но данные были неполными.', 'Детский парк', 'отклонен');
 
-
-
-
 -- ###################### SearchRequests - Таблица для хранения заявок на поиск. 
 -- DROP TABLE SearchRequests 
 CREATE TABLE SearchRequests (
@@ -324,7 +321,7 @@ VALUES
 CREATE TABLE SearchTasks (
     Id INTEGER PRIMARY KEY AUTOINCREMENT,
     EventId INTEGER,                          -- Ссылка на мероприятие (ссылка SearchEvents.Id)
-    AssignedTo INTEGER,                       -- Кому назначена задача (ссылка Users.Id)
+    AssignedToId INTEGER,                     -- Кому назначена задача (ссылка Users.Id)
     Title TEXT NOT NULL,                      -- Название задачи
     Description TEXT,                         -- Описание задачи
     Status VARCHAR(50) NOT NULL               -- Статус задачи: "назначена", "в процессе", "завершена" 'отменена'
@@ -334,7 +331,7 @@ CREATE TABLE SearchTasks (
 
     -- Внешние ключи
     FOREIGN KEY (EventId) REFERENCES SearchEvents(Id) ON DELETE CASCADE,
-    FOREIGN KEY (AssignedTo) REFERENCES Users(Id) ON DELETE SET NULL
+    FOREIGN KEY (AssignedToId) REFERENCES Users(Id) ON DELETE SET NULL
 );
 
 -- Индекс 
