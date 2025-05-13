@@ -28,11 +28,9 @@ namespace Infrastructure.Repositories.Implementations
         {
             //await Task.Delay(TimeSpan.FromSeconds(20));
             var query = _context.Set<SearchTask>().AsQueryable();
-            query = query
-                .Where(l => l.Id == id /*&& !l.Deleted*/);
-
-            var ddd = await query.SingleOrDefaultAsync();
-            return ddd;
+            query = query.Where(l => l.Id == id );
+            var res = await query.SingleOrDefaultAsync();
+            return res;
             //return await query.SingleOrDefaultAsync(cancellationToken);
         }
         

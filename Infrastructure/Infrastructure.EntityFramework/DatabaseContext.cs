@@ -59,7 +59,10 @@ namespace Infrastructure.EntityFramework
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
+            /* Команды:
+               add-migration Initial
+               Update-database
+             */
             // связи сущностей
 
             // Animal → User (OwnerId)
@@ -178,36 +181,58 @@ namespace Infrastructure.EntityFramework
             modelBuilder.Entity<SearchTask>().HasIndex(c => c.AssignedToId);
             modelBuilder.Entity<SearchTask>().HasIndex(c => c.Status);
 
-            // размеры текстовых полей
+            // размеры текстовых полей, обязательность, значения по умолчанию
             modelBuilder.Entity<Animal>().Property(c => c.Name).HasMaxLength(50);
-            modelBuilder.Entity<Animal>().Property(c => c.Species).HasMaxLength(50);
-            modelBuilder.Entity<Animal>().Property(c => c.Breed).HasMaxLength(50);
-            modelBuilder.Entity<Animal>().Property(c => c.Color).HasMaxLength(50);
-            modelBuilder.Entity<Animal>().Property(c => c.ChipNumber).HasMaxLength(50);
-            modelBuilder.Entity<Animal>().Property(c => c.LastSeenLocation).HasMaxLength(500);
-            modelBuilder.Entity<Animal>().Property(c => c.Description).HasMaxLength(1024);
-            modelBuilder.Entity<Animal>().Property(c => c.PhotoUrl).HasMaxLength(1024);
+            modelBuilder.Entity<Animal>().Property(c => c.Species).HasMaxLength(50).IsRequired(false);
+            modelBuilder.Entity<Animal>().Property(c => c.Breed).HasMaxLength(50).IsRequired(false);
+            modelBuilder.Entity<Animal>().Property(c => c.Color).HasMaxLength(50).IsRequired(false);
+            modelBuilder.Entity<Animal>().Property(c => c.ChipNumber).HasMaxLength(50).IsRequired(false);
+            modelBuilder.Entity<Animal>().Property(c => c.LastSeenLocation).HasMaxLength(500).IsRequired(false);
+            modelBuilder.Entity<Animal>().Property(c => c.Description).HasMaxLength(1024).IsRequired(false);
+            modelBuilder.Entity<Animal>().Property(c => c.PhotoUrl).HasMaxLength(1024).IsRequired(false);
+            modelBuilder.Entity<Animal>().Property(d => d.CreatedAt).HasDefaultValueSql("CURRENT_TIMESTAMP");
+            modelBuilder.Entity<Animal>().Property(d => d.UpdatedAt).HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+            modelBuilder.Entity<SearchGroup>().Property(d => d.CreatedAt).HasDefaultValueSql("CURRENT_TIMESTAMP");
+            modelBuilder.Entity<SearchGroup>().Property(d => d.UpdatedAt).HasDefaultValueSql("CURRENT_TIMESTAMP");
 
             modelBuilder.Entity<GroupMember>().Property(c => c.Role).HasMaxLength(50);
+            modelBuilder.Entity<GroupMember>().Property(d => d.CreatedAt).HasDefaultValueSql("CURRENT_TIMESTAMP");
+            modelBuilder.Entity<GroupMember>().Property(d => d.UpdatedAt).HasDefaultValueSql("CURRENT_TIMESTAMP");
 
             modelBuilder.Entity<SearchAnnouncement>().Property(c => c.Description).HasMaxLength(1024);
             modelBuilder.Entity<SearchAnnouncement>().Property(c => c.LastSeenLocation).HasMaxLength(500);
             modelBuilder.Entity<SearchAnnouncement>().Property(c => c.Status).HasMaxLength(50);
+            modelBuilder.Entity<SearchAnnouncement>().Property(d => d.CreatedAt).HasDefaultValueSql("CURRENT_TIMESTAMP");
+            modelBuilder.Entity<SearchAnnouncement>().Property(d => d.UpdatedAt).HasDefaultValueSql("CURRENT_TIMESTAMP");
+
 
             modelBuilder.Entity<SearchEvent>().Property(c => c.Description).HasMaxLength(1024);
             modelBuilder.Entity<SearchEvent>().Property(c => c.Location).HasMaxLength(500);
             modelBuilder.Entity<SearchEvent>().Property(c => c.Status).HasMaxLength(50);
+            modelBuilder.Entity<SearchEvent>().Property(d => d.CreatedAt).HasDefaultValueSql("CURRENT_TIMESTAMP");
+            modelBuilder.Entity<SearchEvent>().Property(d => d.UpdatedAt).HasDefaultValueSql("CURRENT_TIMESTAMP");
+
 
             modelBuilder.Entity<SearchRequest>().Property(c => c.Description).HasMaxLength(1024);
             modelBuilder.Entity<SearchRequest>().Property(c => c.Status).HasMaxLength(50);
+            modelBuilder.Entity<SearchRequest>().Property(d => d.CreatedAt).HasDefaultValueSql("CURRENT_TIMESTAMP");
+            modelBuilder.Entity<SearchRequest>().Property(d => d.UpdatedAt).HasDefaultValueSql("CURRENT_TIMESTAMP");
+
 
             modelBuilder.Entity<SearchTask>().Property(c => c.Title).HasMaxLength(100);
             modelBuilder.Entity<SearchTask>().Property(c => c.Description).HasMaxLength(1024);
             modelBuilder.Entity<SearchTask>().Property(c => c.Status).HasMaxLength(50);
+            modelBuilder.Entity<SearchTask>().Property(d => d.CreatedAt).HasDefaultValueSql("CURRENT_TIMESTAMP");
+            modelBuilder.Entity<SearchTask>().Property(d => d.UpdatedAt).HasDefaultValueSql("CURRENT_TIMESTAMP");
+
 
             modelBuilder.Entity<User>().Property(c => c.Username).HasMaxLength(50);
             modelBuilder.Entity<User>().Property(c => c.ShortName).HasMaxLength(50);
             modelBuilder.Entity<User>().Property(c => c.FullName).HasMaxLength(100);
+            modelBuilder.Entity<User>().Property(d => d.CreatedAt).HasDefaultValueSql("CURRENT_TIMESTAMP");
+            modelBuilder.Entity<User>().Property(d => d.UpdatedAt).HasDefaultValueSql("CURRENT_TIMESTAMP");
+
 
             // VDV: Прошлое удалить после стабилизации
 

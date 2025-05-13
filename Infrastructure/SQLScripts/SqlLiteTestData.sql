@@ -5,26 +5,6 @@
 -- обновляем базу (для отладки ), перед этим очищаем БД просто переименовываем файл LocalDatabase.db в LocalDatabase_LAST.db
 -- Update-database
 
-
-
-
--- Скрипты для создания таблиц
-
-
-
-
--- ###################### Пользователи - Users
-
--- DROP TABLE Users
-CREATE TABLE Users (
-    Id INTEGER PRIMARY KEY NOT NULL,				-- Уникальный идентификатор пользователя
-    Username TEXT NOT NULL UNIQUE,					-- Логин пользователя
-    ShortName TEXT,									-- Краткое имя (пример: Ваня)
-    FullName TEXT,									-- Полное имя пользователя
-    CreatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,	-- Дата и время создания записи
-    UpdatedAt DATETIME DEFAULT CURRENT_TIMESTAMP	-- Дата и время последнего обновления
-);
-
 -- Добавляем данные
 -- select * from Users 
 INSERT INTO Users (Id, Username, ShortName, FullName, CreatedAt, UpdatedAt) VALUES
@@ -52,29 +32,7 @@ INSERT INTO Users (Id, Username, ShortName, FullName, CreatedAt, UpdatedAt) VALU
 (18, 'vol7', 'Катя А.', 'Екатерина Андреева', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 (19, 'vol8', 'Ольга П.', 'Ольга Петрова', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 (20, 'vol9', 'Таня С.', 'Татьяна Соколова', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
-
-
--- ###################### Питомцы - Animals 
-
--- DROP TABLE Animals 
--- select * from Animals 
-CREATE TABLE Animals (
-    Id INTEGER PRIMARY KEY AUTOINCREMENT, -- Идентификатор животного
-    Name TEXT,									-- Имя животного
-    Species TEXT,								-- Вид животного (например: собака, кошка)
-    Breed TEXT,									-- Порода
-    Color TEXT,									-- Цвет (окрас)
-    ChipNumber TEXT,							-- Номер чипа
-    OwnerId INTEGER,							-- Владелец (Ссылка на Users)
-	LastSeenLocation TEXT,						-- Последнее известное место
-    Description TEXT,							-- Описание (особые приметы, особенности)
-    PhotoUrl TEXT,								-- Ссылка на фото
-    CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,	-- Дата создания записи
-    UpdatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,	-- Дата последнего обновления записи
-    FOREIGN KEY (OwnerId) REFERENCES Users(Id) ON DELETE SET NULL
-);
---- ИНДЕКСЫ
-CREATE INDEX IX_Animals_OwnerId ON Animals(OwnerId);
+-- select * from Users 
 
 -- ДЕМО ДАННЫЕ: select * from Animals
 -- Добавляем животных для пользователя с Id = 1 (john_doe)
@@ -90,27 +48,7 @@ VALUES
 ('Лютик', 'Кролик', 'Голландский', 'Белый с черным пятном на лбу', 'CHIP0015', 8, 'Детский парк', 'Маленький и проворный', 'https://example.com/photo15.jpg '),
 ('Джек', 'Собака', 'Пудель', 'Белый', 'CHIP0017', 9, 'Сквер возле школы', 'Обучаемый, выполняет команды', 'https://example.com/photo17.jpg '),
 ('Чарли', 'Кошка', 'Шотландская вислоухая', 'Серая', 'CHIP0020', 10, 'Балкон', 'Очень милая и ласковая', 'https://example.com/photo20.jpg ');
-
-
-
--- ###################### SearchAnnouncements - Таблица для хранения объявлений о поиске.
-
--- DROP TABLE SearchAnnouncements 
-CREATE TABLE SearchAnnouncements (
-    Id INTEGER PRIMARY KEY AUTOINCREMENT, 	-- Уникальный идентификатор объявления (первичный ключ, автоинкремент)
-    AnimalId INTEGER,						-- Идентификатор животного, на которое создано объявление (ссылка на таблицу
-    OwnerId INTEGER,						-- Идентификатор владельца животного (ссылка на таблицу)
-    Description TEXT,						-- Описание объявления (например: "Пропал кот Мурка")
-    LastSeenLocation VARCHAR(255),			-- Последнее известное место, где видели животное
-    Status VARCHAR(50) NOT NULL DEFAULT 'активен', -- например: "активен", "завершен", "отклонен"
-    CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    UpdatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (AnimalId) REFERENCES Animals(Id) ON DELETE SET NULL,
-    FOREIGN KEY (OwnerId) REFERENCES Users(Id) ON DELETE CASCADE
-);
--- ИНДЕКСЫ
-CREATE INDEX IX_SearchAnnouncements_OwnerId ON SearchAnnouncements(OwnerId);
-CREATE INDEX IX_SearchAnnouncements_Status ON SearchAnnouncements(Status);
+-- ДЕМО ДАННЫЕ: select * from Animals
 
 -- select * from SearchAnnouncements 
 -- Демо данные в таблице
@@ -125,7 +63,6 @@ VALUES
 (7, 7, 'Кот Феликс ушёл из офиса. Не переносит шума.', 'Офис компании', 'активен'),
 (9, 9, 'Пудель Джек пропал со сквера возле школы.', 'Сквер возле школы', 'активен'),
 (10, 10, 'Кошка Чарли ушла с балкона. Очень ласковая.', 'Балкон', 'активен'),
-
 -- Завершённые объявления (животное найдено)
 (3, 3, 'Кролик Снежок ушел, но уже найден.', 'Сад у дома', 'завершен'),
 (6, 6, 'Кошка Снежана потерялась, но позже вернулась домой.', 'Квартира на 5 этаже', 'завершен'),
@@ -133,32 +70,12 @@ VALUES
 -- Отклонённые объявления (например, некорректные или отменённые)
 (4, 4, 'Кот Барсик потерялся, но информация оказалась ошибочной.', 'Квартира на проспекте', 'отклонен'),
 (8, 8, 'Кролик Лютик потерялся, но данные были неполными.', 'Детский парк', 'отклонен');
+-- select * from SearchAnnouncements 
 
 -- ###################### SearchRequests - Таблица для хранения заявок на поиск. 
--- DROP TABLE SearchRequests 
-CREATE TABLE SearchRequests (
-    Id INTEGER PRIMARY KEY AUTOINCREMENT, 			-- Уникальный идентификатор заявки
-    AnnouncementId INTEGER,							-- Идентификатор объявления о поиске
-    CoordinatorId INTEGER, 							-- Идентификатор координатора (пользователя) 
-    Description TEXT,								-- Описание заявки в дополненении к обьявлению
-    Status VARCHAR(50) NOT NULL DEFAULT 'активен', 	-- Статус заявки (например: "активен", "завершен", "приостановлен", "отменен")
-    CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  -- Дата и время создания заявки
-    UpdatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  -- Дата и время последнего обновления
-
-    -- Внешние ключи (в SQLite ссылки нужно указывать отдельно через FOREIGN KEY)
-    FOREIGN KEY (AnnouncementId) REFERENCES SearchAnnouncements(Id) ON DELETE CASCADE,
-    FOREIGN KEY (CoordinatorId) REFERENCES Users(Id) ON DELETE SET NULL
-);
--- индексы
-CREATE INDEX IX_SearchRequests_AnnouncementId ON SearchRequests(AnnouncementId);
-CREATE INDEX IX_SearchRequests_CoordinatorId ON SearchRequests(CoordinatorId);
-CREATE INDEX IX_SearchRequests_Status ON SearchRequests(Status);
-
-
 -- Заявки по активным объявлениям Демо данные
 -- select * from SearchRequests
 -- select * from SearchAnnouncements
-
 INSERT INTO SearchRequests (AnnouncementId, CoordinatorId, Description, Status)
 VALUES
 (1, 11, 'Поиск#1 кошки Мурка', 'активен'),
@@ -171,25 +88,9 @@ VALUES
 (8, 11, 'Поиск#8 - Ошибка в объявлении — данные неполные', 'отклонен'),
 (9, 11, 'Поиск#9', 'активен'),
 (10, 11, 'Поиск#10 - Нет возможности участвовать, мало информации', 'отклонен');
-
+-- select * from SearchAnnouncements
 
 -- ###################### SearchGroups - Таблица для хранения групп поиска. 
--- drop table SearchGroups
-CREATE TABLE SearchGroups (
-    Id INTEGER PRIMARY KEY AUTOINCREMENT,		-- Уникальный идентификатор группы
-    RequestId INTEGER,							-- Ссылка на заявку (SearchRequests.Id)
-    LeaderId INTEGER,							-- Идентификатор лидера группы (пользователь, участвующий в поиске)
-    CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Дата время создания группы
-    UpdatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Дата последнего обновления
-
-    -- Внешние ключи
-    FOREIGN KEY (RequestId) REFERENCES SearchRequests(Id) ON DELETE CASCADE,
-    FOREIGN KEY (LeaderId) REFERENCES Users(Id) ON DELETE SET NULL
-);
--- Индексы
-CREATE INDEX IX_SearchGroups_RequestId ON SearchGroups(RequestId);
-CREATE INDEX IX_SearchGroups_LeaderId ON SearchGroups(LeaderId);
-
 -- ДЕМО ДАННЫЕ
 -- select * from SearchGroups
 --		-- select * from SearchRequests --смотрим запросы поиска
@@ -206,24 +107,10 @@ VALUES
 (8, 15),
 (9, 12),
 (10, 15);
+-- select * from SearchGroups
 
 -- ###################### GroupMembers - Таблица для хранения участников групп поиска.
 -- DROP TABLE GroupMembers
-CREATE TABLE GroupMembers (
-    Id INTEGER PRIMARY KEY AUTOINCREMENT,		-- Уникальный ID участника группы
-    GroupId INTEGER,							-- Ссылка на группу (
-    UserId INTEGER,								-- Ссылка на пользователя (
-    Role VARCHAR(50),							-- Роль в группе (например: "volunteer", "leader")
-    CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Дата создания записи
-    UpdatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Дата последнего обновления
-
-    -- Внешние ключи
-    FOREIGN KEY (GroupId) REFERENCES SearchGroups(Id) ON DELETE CASCADE,
-    FOREIGN KEY (UserId) REFERENCES Users(Id) ON DELETE CASCADE
-);
--- Индексы 
-CREATE INDEX IX_GroupMembers_UserId ON GroupMembers(UserId);
-CREATE INDEX IX_GroupMembers_GroupId ON GroupMembers(GroupId);
 -- ДЕМО ДАННЫЕ 
 -- select * from SearchGroups
 -- select * from GroupMembers 
@@ -271,34 +158,6 @@ INSERT INTO GroupMembers (GroupId, UserId, Role) VALUES
 (10, 13, 'volunteer');
 
 -- ###################### SearchEvents - Таблица для хранения мероприятий поиска
-
--- Создание таблицы SearchEvents
-CREATE TABLE SearchEvents (
-    Id INTEGER PRIMARY KEY AUTOINCREMENT,			-- Уникальный ID мероприятия
-    RequestId INTEGER,								-- Ссылка на заявку (SearchRequests.Id)
-    CreatedBy INTEGER,								-- Кто создал мероприяти (Users.Id)
-    Description TEXT,								-- Описание мероприятия
-    Location VARCHAR(255),							-- Место проведения
-	Status VARCHAR(50) NOT NULL DEFAULT 'планируется', -- Статус мероприятия: планируется, выполняется, завершено, остановлено
-    StartTime DATETIME,								-- Время начала
-    EndTime DATETIME,								-- Время окончания
-    CreatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,	-- Дата создания
-    UpdatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,	-- Дата последнего обновления
-
-    -- Внешние ключи
-    FOREIGN KEY (RequestId) REFERENCES SearchRequests(Id) ON DELETE CASCADE,
-    FOREIGN KEY (CreatedBy) REFERENCES Users(Id) ON DELETE CASCADE
-);
-
--- Индекс 
-CREATE INDEX IX_SearchEvents_RequestId ON SearchEvents(RequestId);
-CREATE INDEX IX_SearchEvents_CreatedBy ON SearchEvents(CreatedBy);
-CREATE INDEX IX_SearchEvents_StartTime ON SearchEvents(StartTime);
-CREATE INDEX IX_SearchEvents_Status ON SearchEvents(Status); 
--- добавляю новые необязательные поля
-
-
-
 -- Демо данные 
 -- select * from SearchRequests 
 -- select * from SearchGroups 
@@ -327,27 +186,7 @@ VALUES
 (10, 15, 'Изучение информации о последнем местонахождении', 'Магазин у балкона', '2025-04-06 13:00:00', '2025-04-06 15:00:00', 'остановлено');
 
 -- ###################### SearchTasks - Таблица для хранения задач поиска
--- drop table SearchTasks
-CREATE TABLE SearchTasks (
-    Id INTEGER PRIMARY KEY AUTOINCREMENT,
-    EventId INTEGER,                          -- Ссылка на мероприятие (ссылка SearchEvents.Id)
-    AssignedToId INTEGER,                     -- Кому назначена задача (ссылка Users.Id)
-    Title TEXT NOT NULL,                      -- Название задачи
-    Description TEXT,                         -- Описание задачи
-    Status VARCHAR(50) NOT NULL               -- Статус задачи: "назначена", "в процессе", "завершена" 'отменена'
-        CHECK (Status IN ('назначена', 'в процессе', 'завершена', 'отменена')),
-    CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Дата создания записи
-    UpdatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Дата последнего обновления
 
-    -- Внешние ключи
-    FOREIGN KEY (EventId) REFERENCES SearchEvents(Id) ON DELETE CASCADE,
-    FOREIGN KEY (AssignedToId) REFERENCES Users(Id) ON DELETE SET NULL
-);
-
--- Индекс 
-CREATE INDEX IX_SearchTasks_EventId ON SearchTasks(EventId);
-CREATE INDEX IX_SearchTasks_AssignedTo ON SearchTasks(AssignedTo);
-CREATE INDEX IX_SearchTasks_Status ON SearchTasks(Status);
 -- Добавляю поля (в процессе отладки после пересоздания можно удалить)
 -- Демо данные
 -- select * from SearchTasks
@@ -355,7 +194,7 @@ CREATE INDEX IX_SearchTasks_Status ON SearchTasks(Status);
 			-- select * from GroupMembers 
 			-- select * from SearchGroups
 
-INSERT INTO SearchTasks (EventId, AssignedTo, Title, Description, Status)
+INSERT INTO SearchTasks (EventId, AssignedToId, Title, Description, Status)
 VALUES
 -- EventId = 1
 (1, 12, 'Расспросить соседей', 'Узнать, видели ли кто-нибудь кошку Мурка', 'в процессе'),
