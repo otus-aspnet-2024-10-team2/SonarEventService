@@ -38,8 +38,8 @@ namespace WebApi
         private static IServiceCollection InstallRepositories(this IServiceCollection serviceCollection)
         {
             serviceCollection
-                .AddTransient<ISonarProcessRepository, SonarProcessRepository>()
-                .AddTransient<ISearchTaskRepository, SonarTaskRepository>()
+                .AddTransient<ISonarProcessRepository, SearchEventRepository>()
+                .AddTransient<ISearchTaskRepository, SearchTaskRepository>()
                 .AddTransient<ISearchGroupRepository, SearchGroupRepository>()
                 .AddTransient<IGroupMemberRepository, GroupMemberRepository>()
                 .AddTransient<IUnitOfWork, UnitOfWork>();

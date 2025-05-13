@@ -16,9 +16,9 @@ namespace Infrastructure.EntityFramework
         }
         
         /// <summary>
-        /// Процессы поиска
+        /// Мероприятия поиска
         /// </summary>
-        public DbSet<SearchEvent> SonarProcess { get; set; }
+        public DbSet<SearchEvent> SearchEvents { get; set; }
         
         /// <summary>
         /// Задачи поиска
@@ -37,16 +37,28 @@ namespace Infrastructure.EntityFramework
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);            
-            
-            modelBuilder.Entity<SearchEvent>()
-                .HasMany(u => u.SearchTasks)
-                .WithOne(c=> c.SearchEvent)
-                .IsRequired();
-            
-        //    modelBuilder.Entity<>()
-        //.Property(d => d.Created)
-        //.HasDefaultValueSql("CURRENT_TIMESTAMP");
+            base.OnModelCreating(modelBuilder);
+
+            // VDV: Описать модель сущностей 
+
+            modelBuilder.Entity<SearchTask>(entity =>
+            {
+                entity.HasOne(t => t.Event)
+                      .WithMany(e => e.Tasks)
+                      .HasForeignKey(t => t.EventId)
+                      //.OnDelete(DeleteBehavior.Restrict)
+                      ; // или Cascade, если нужно
+            });
+
+
+            //modelBuilder.Entity<SearchEvent>()
+            //    .HasMany(u => u.SearchTasks)
+            //    .WithOne(c=> c.Event)
+            //    .IsRequired();
+
+            //    modelBuilder.Entity<>()
+            //.Property(d => d.Created)
+            //.HasDefaultValueSql("CURRENT_TIMESTAMP");
 
             //modelBuilder.Entity<SearchGroup>()
             //    .Property(d => d.UpdatedAt)
@@ -61,8 +73,8 @@ namespace Infrastructure.EntityFramework
 
             //modelBuilder.Entity<Course>().HasIndex(c=>c.Name);
 
-            modelBuilder.Entity<SearchEvent>().Property(c => c.Name).HasMaxLength(100);
-            modelBuilder.Entity<SearchTask>().Property(c => c.Subject).HasMaxLength(100);
+            //modelBuilder.Entity<SearchEvent>().Property(c => c.Status).HasMaxLength(100);
+            //modelBuilder.Entity<SearchTask>().Property(c => c.Subject).HasMaxLength(100);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -76,6 +88,7 @@ namespace Infrastructure.EntityFramework
 
             foreach (var entry in entries)
             {
+                // VDV: сделать тоже самое для остальных обьектов 
                 if (entry.Entity is SearchGroup group)
                 {
                     var now = DateTime.UtcNow;

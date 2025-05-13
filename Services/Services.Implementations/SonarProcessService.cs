@@ -82,7 +82,8 @@ namespace Services.Implementations
                 throw new Exception($"Курс с идентфикатором {id} не найден");
             }
 
-            sonarProcess.Name = updatingSonarProcessWithLSonarTasksDto.Name;
+            // VDV: Настроить под новые данные
+            //sonarProcess.Name = updatingSonarProcessWithLSonarTasksDto.Name;
             //sonarProcess.Price = updatingSonarProcessWithLSonarTasksDto.Price;
             _sonarProcessRepository.Update(sonarProcess);
             await _sonarProcessRepository.SaveChangesAsync();
@@ -90,7 +91,7 @@ namespace Services.Implementations
             var sonarTasks = _mapper.Map<IEnumerable<AttachingSearchTasksDto>, IEnumerable<SearchTask>>(updatingSonarProcessWithLSonarTasksDto.SonarTasks);
             foreach (var lesson in sonarTasks)
             {
-                lesson.SearchEventId = 100; //Не существует
+                lesson.EventId = 100; //Не существует VDV: Момент смотреть нужна отладка
                 await _sonarTaskRepository.AddAsync(lesson);
                 //await _unitOfWork.LessonRepository.AddAsync(lesson);
             }
@@ -109,10 +110,11 @@ namespace Services.Implementations
             var sonarProcess = await _sonarProcessRepository.GetAsync(id, CancellationToken.None);
             if (sonarProcess == null)
             {
-                throw new Exception($"Процесс поиска с идентфикатором {id} не найден");
+                throw new Exception($"Мероприятие поиска с идентфикатором {id} не найден");
             }
 
-            sonarProcess.Name = updatingCourseDto.Name;
+            // VDV: Настроить под новые данные
+            //sonarProcess.Name = updatingCourseDto.Name;
             //sonarProcess.Price = updatingCourseDto.Price;
             _sonarProcessRepository.Update(sonarProcess);
             await _sonarProcessRepository.SaveChangesAsync();
@@ -125,8 +127,20 @@ namespace Services.Implementations
         public async Task DeleteAsync(long id)
         {
             var sonarProcess = await _sonarProcessRepository.GetAsync(id, CancellationToken.None);
-            sonarProcess.Deleted = true; 
+            var deleted = _sonarProcessRepository.Delete(id);
+            if (!deleted)
+            {
+                throw new Exception($"Мероприятие поиска с идентфикатором {id} не удалена!");
+            }
             await _sonarProcessRepository.SaveChangesAsync();
+
+            //var searchGroup = await _searchGroupRepository.GetAsync(id, CancellationToken.None);
+            //var deleted = _searchGroupRepository.Delete(id);
+            //if (!deleted)
+            //{
+            //    throw new Exception($"Группа поиска с идентфикатором {id} не удалена!");
+            //}
+            //await _searchGroupRepository.SaveChangesAsync();
         }
         
         /// <summary>

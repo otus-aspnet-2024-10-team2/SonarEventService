@@ -1,15 +1,62 @@
-﻿namespace WebApi.Models.SearchTask
+﻿using System;
+
+namespace WebApi.Models.SearchTask
 {
+    /// <summary>
+    /// DTO-модель задачи, назначенной в рамках мероприятия
+    /// </summary>
     public class SearchTaskModel
     {
         /// <summary>
-        /// Идентификатор.
+        /// Уникальный идентификатор задачи
         /// </summary>
         public long Id { get; set; }
 
         /// <summary>
-        /// Тема.
+        /// Идентификатор мероприятия, к которому относится задача
         /// </summary>
-        public string Subject { get; set; }
+        public long EventId { get; set; }
+
+        /// <summary>
+        /// Идентификатор пользователя, которому назначена задача
+        /// </summary>
+        public long AssignedToId { get; set; }
+
+        /// <summary>
+        /// Заголовок задачи
+        /// </summary>
+        public string Title { get; set; }
+
+        /// <summary>
+        /// Описание задачи
+        /// </summary>
+        public string Description { get; set; }
+
+        /// <summary>
+        /// Статус задачи: назначена / в процессе / завершена / отменена
+        /// </summary>
+        public string Status { get; set; }
+
+        /// <summary>
+        /// Дата создания задачи
+        /// </summary>
+        public DateTime CreatedAt { get; set; }
+
+        /// <summary>
+        /// Дата последнего обновления задачи
+        /// </summary>
+        public DateTime UpdatedAt { get; set; }
     }
+    //public class SearchTaskModel
+    //{
+    //    /// <summary>
+    //    /// Идентификатор.
+    //    /// </summary>
+    //    public long Id { get; set; }
+
+    //    /// <summary>
+    //    /// Тема.
+    //    /// </summary>
+    //    public string Subject { get; set; }
+    //}
 }

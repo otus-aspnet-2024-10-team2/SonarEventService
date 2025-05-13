@@ -11,10 +11,13 @@ namespace WebApi.Mapping
     {
         public SonarTaskMappingsProfile()
         {
-            CreateMap<SearchTaskDto, SearchTaskModel>();
-            CreateMap<CreatingSearchTaskModel, CreatingSearchTaskDto>();
-            CreateMap<UpdatingSearchTaskModel, UpdatingSearchTaskDto>();
-            CreateMap<AttachingSearchTaskModel, AttachingSearchTasksDto>();
+            CreateMap<SearchTaskDto, SearchTaskModel>()
+                //.ForMember(d => d.AssignedToId, map => map.MapFrom(m => m.AssignedTo))
+                ;
+            // VDV: Настривать
+            //CreateMap<CreatingSearchTaskModel, CreatingSearchTaskDto>();
+            //CreateMap<UpdatingSearchTaskModel, UpdatingSearchTaskDto>();
+            //CreateMap<AttachingSearchTaskModel, AttachingSearchTasksDto>();
         }
     }
 }

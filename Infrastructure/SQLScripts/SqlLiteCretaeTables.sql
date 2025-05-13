@@ -288,6 +288,10 @@ CREATE INDEX IX_SearchEvents_RequestId ON SearchEvents(RequestId);
 CREATE INDEX IX_SearchEvents_CreatedBy ON SearchEvents(CreatedBy);
 CREATE INDEX IX_SearchEvents_StartTime ON SearchEvents(StartTime);
 CREATE INDEX IX_SearchEvents_Status ON SearchEvents(Status); 
+-- добавляю новые необязательные поля
+
+
+
 -- Демо данные 
 -- select * from SearchRequests 
 -- select * from SearchGroups 
@@ -337,7 +341,7 @@ CREATE TABLE SearchTasks (
 CREATE INDEX IX_SearchTasks_EventId ON SearchTasks(EventId);
 CREATE INDEX IX_SearchTasks_AssignedTo ON SearchTasks(AssignedTo);
 CREATE INDEX IX_SearchTasks_Status ON SearchTasks(Status);
-
+-- Добавляю поля (в процессе отладки после пересоздания можно удалить)
 -- Демо данные
 -- select * from SearchTasks
 			-- select * from SearchEvents

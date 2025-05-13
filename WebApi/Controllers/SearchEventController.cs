@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Services.Contracts.SonarProcess;
 using WebApi.Models.SearchEvent;
+using CDH = WebApi.Controllers.Helper.ControllerDebugHelper;
 
 namespace WebApi.Controllers
 {
@@ -28,6 +29,9 @@ namespace WebApi.Controllers
         public async Task<IActionResult> GetAsync(long eventId)
         {
             return Ok(_mapper.Map<SearchEventModel>(await _service.GetByIdAsync(eventId)));
+
+            //return Ok((SearchEventModel)CDH.GetTestSearchEventModel());  // ОТЛАДКА УДАЛИТЬ
+
         }
 
         [HttpPost]

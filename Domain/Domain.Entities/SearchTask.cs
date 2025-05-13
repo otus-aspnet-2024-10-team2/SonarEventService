@@ -1,35 +1,97 @@
-﻿namespace Domain.Entities
+﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Domain.Entities
 {
+
+
     /// <summary>
-    /// Задача.
+    /// Сущность задачи по поиску животного
     /// </summary>
     public class SearchTask : IEntity<long>
     {
         /// <summary>
-        /// Идентификатор.
+        /// Уникальный идентификатор задачи
         /// </summary>
         public long Id { get; set; }
 
         /// <summary>
-        /// Тема.
+        /// Идентификатор мероприятия, к которому относится задача
         /// </summary>
-        public string Subject { get; set; }
+        [Column("EventId")]
+        public long EventId { get; set; }
 
         /// <summary>
-        /// процесс поиска.
+        /// Идентификатор пользователя, которому назначена задача
         /// </summary>
-        public virtual SearchEvent SearchEvent { get; set; }
+        [Column("AssignedTo")]
+        public long AssignedToId { get; set; }
 
         /// <summary>
-        /// Id процесса поиска.
+        /// Заголовок задачи
         /// </summary>
-        public long SearchEventId { get; set; }
+        public string Title { get; set; }
 
         /// <summary>
-        /// Удалено.
+        /// Описание задачи
         /// </summary>
-        public bool Deleted { get; set; }
+        public string Description { get; set; }
 
-        //public DateTime DateTime { get; set; }
+        /// <summary>
+        /// Статус задачи: назначена / в процессе / завершена / отменена
+        /// </summary>
+        public string Status { get; set; }
+
+        /// <summary>
+        /// Дата создания задачи
+        /// </summary>
+        public DateTime CreatedAt { get; set; }
+
+        /// <summary>
+        /// Дата последнего обновления задачи
+        /// </summary>
+        public DateTime UpdatedAt { get; set; }
+
+        // Навигационные свойства
+
+        /// <summary>
+        /// Мероприятие, к которому относится задача
+        /// </summary>
+        public virtual SearchEvent Event { get; set; }
+
+        /// <summary>
+        /// Пользователь, которому назначена задача
+        /// </summary>
+        public virtual User AssignedTo { get; set; }
     }
+
+
+    /// <summary>
+    /// Задача.
+    /// </summary>
+    //public class SearchTask : IEntity<long>
+    //{
+    //    /// <summary>
+    //    /// Идентификатор.
+    //    /// </summary>
+    //    public long Id { get; set; }
+
+    //    /// <summary>
+    //    /// Тема.
+    //    /// </summary>
+    //    public string Subject { get; set; }
+
+    //    /// <summary>
+    //    /// процесс поиска.
+    //    /// </summary>
+    //    public virtual SearchEvent SearchEvent { get; set; }
+
+    //    /// <summary>
+    //    /// Id процесса поиска.
+    //    /// </summary>
+    //    public long SearchEventId { get; set; }
+
+
+    //    //public DateTime DateTime { get; set; }
+    //}
 }

@@ -19,8 +19,8 @@ public class UnitOfWork: IUnitOfWork
     public UnitOfWork(DatabaseContext context)
     {
         _context = context;
-        _lessonRepository = new SonarTaskRepository(context);
-        _courseRepository = new SonarProcessRepository(context);
+        _lessonRepository = new SearchTaskRepository(context);
+        _courseRepository = new SearchEventRepository(context);
     }
 
     public async Task SaveChangesAsync()

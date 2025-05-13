@@ -39,8 +39,15 @@ namespace Services.Implementations
         /// <returns> ДТО задачи поиска. </returns>
         public async Task<SearchTaskDto> GetByIdAsync(long id, CancellationToken cancellationToken)
         {
-            var searchTask = await _searchTaskRepository.GetAsync(id, cancellationToken);
-            return _mapper.Map<SearchTask, SearchTaskDto>(searchTask);
+            try
+            {
+                var searchTask = await _searchTaskRepository.GetAsync(id, cancellationToken);
+                return _mapper.Map<SearchTask, SearchTaskDto>(searchTask);
+            }
+            catch (Exception e) // VDV: Убрать
+            {
+                throw e;
+            }
         }
 
         /// <summary>
@@ -51,7 +58,7 @@ namespace Services.Implementations
         public async Task<long> CreateAsync(CreatingSearchTaskDto сreatingSearchTaskDto)
         {
             var searchTask = _mapper.Map<CreatingSearchTaskDto, SearchTask>(сreatingSearchTaskDto);
-            searchTask.SearchEventId = сreatingSearchTaskDto.SonarProcessId;
+            //searchTask.SearchEventId = сreatingSearchTaskDto.SonarProcessId; // VDV Заполнять
             var createdSearchTask = await _searchTaskRepository.AddAsync(searchTask);
             await _searchTaskRepository.SaveChangesAsync();
             // здесь как понял идет публикация сообщения ... надо изучать пока закоментировал, как понимаю отправляет сообщение
@@ -76,7 +83,7 @@ namespace Services.Implementations
                 throw new Exception($"Задача поиска с id = {id} не найден");
             }
 
-            searchTask.Subject = updatingSearchTaskDto.Subject;
+            //searchTask.Subject = updatingSearchTaskDto.Subject; // VDV: Заполнять
             _searchTaskRepository.Update(searchTask);
             await _searchTaskRepository.SaveChangesAsync();
         }
@@ -88,8 +95,23 @@ namespace Services.Implementations
         public async Task DeleteAsync(long id)
         {
             var searchTask = await _searchTaskRepository.GetAsync(id, CancellationToken.None);
-            searchTask.Deleted = true; 
+            //searchTask.Deleted = true;  // VDV: Удалить
+            var deleted = _searchTaskRepository.Delete(id);
+            if (!deleted)
+            {
+                throw new Exception($"Задача поиска с идентфикатором {id} не удалена!");
+            }
             await _searchTaskRepository.SaveChangesAsync();
+
+            // VDV: Удалить отладка
+            //var searchGroup = await _searchGroupRepository.GetAsync(id, CancellationToken.None);
+            //var deleted = _searchGroupRepository.Delete(id);
+            //if (!deleted)
+            //{
+            //    throw new Exception($"Группа поиска с идентфикатором {id} не удалена!");
+            //}
+            //await _searchGroupRepository.SaveChangesAsync();
+
         }
         
         /// <summary>

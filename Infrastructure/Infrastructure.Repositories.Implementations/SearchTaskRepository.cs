@@ -12,9 +12,9 @@ namespace Infrastructure.Repositories.Implementations
     /// <summary>
     /// Репозиторий работы с задачами поиска.
     /// </summary>
-    public class SonarTaskRepository: Repository<SearchTask, long>, ISearchTaskRepository 
+    public class SearchTaskRepository: Repository<SearchTask, long>, ISearchTaskRepository 
     {
-        public SonarTaskRepository(DatabaseContext context): base(context)
+        public SearchTaskRepository(DatabaseContext context): base(context)
         {
         }
 
@@ -29,9 +29,10 @@ namespace Infrastructure.Repositories.Implementations
             //await Task.Delay(TimeSpan.FromSeconds(20));
             var query = _context.Set<SearchTask>().AsQueryable();
             query = query
-                .Where(l => l.Id == id && !l.Deleted);
+                .Where(l => l.Id == id /*&& !l.Deleted*/);
 
-            return await query.SingleOrDefaultAsync();
+            var ddd = await query.SingleOrDefaultAsync();
+            return ddd;
             //return await query.SingleOrDefaultAsync(cancellationToken);
         }
         
@@ -43,7 +44,7 @@ namespace Infrastructure.Repositories.Implementations
         /// <returns> Список задач поиска. </returns>
         public async Task<List<SearchTask>> GetPagedAsync(int page, int itemsPerPage)
         {
-            var query = GetAll().Where(l => !l.Deleted);
+            var query = GetAll();//.Where(l => !l.Deleted);
             return await query
                 .Skip((page - 1) * itemsPerPage)
                 .Take(itemsPerPage)
