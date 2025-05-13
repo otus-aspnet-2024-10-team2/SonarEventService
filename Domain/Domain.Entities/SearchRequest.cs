@@ -57,9 +57,10 @@ public class SearchRequest : IEntity<long>
     public virtual User Coordinator { get; set; }
 
     /// <summary>
-    /// Группа поиска, связанная с этой заявкой
+    /// Группы поиска, связанная с этой заявкой
     /// </summary>
-    public virtual SearchGroup Group { get; set; }
+
+    public virtual List<SearchGroup> Groups { get; set; } = new List<SearchGroup>();
 
     /// <summary>
     /// Мероприятия, связанные с этой заявкой
