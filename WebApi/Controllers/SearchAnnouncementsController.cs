@@ -12,13 +12,13 @@ namespace WebApi.Controllers
 {
     [ApiController]
     [Route("api/v1/search-announcements")]
-    public class SearchAnnouncementController : ControllerBase
+    public class SearchAnnouncementsController : ControllerBase
     {
         private readonly ISearchAnnouncementService _service;
-        private readonly ILogger<SearchAnnouncementController> _logger;
+        private readonly ILogger<SearchAnnouncementsController> _logger;
         private readonly IMapper _mapper;
 
-        public SearchAnnouncementController(ISearchAnnouncementService service, ILogger<SearchAnnouncementController> logger, IMapper mapper)
+        public SearchAnnouncementsController(ISearchAnnouncementService service, ILogger<SearchAnnouncementsController> logger, IMapper mapper)
         {
             _service = service;
             _logger = logger;
