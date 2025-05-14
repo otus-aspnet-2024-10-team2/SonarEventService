@@ -89,10 +89,11 @@ namespace Services.Implementations
             _searchEventRepository.Update(searchEvent);
             await _searchEventRepository.SaveChangesAsync();
             //_unitOfWork.CourseRepository.Update(course);
-            var sonarTasks = _mapper.Map<IEnumerable<AttachingSearchTasksDto>, IEnumerable<SearchTask>>(updatingSonarProcessWithLSonarTasksDto.SonarTasks);
+            var sonarTasks = _mapper.Map<IEnumerable<AttachingSearchTasksDto>, IEnumerable<SearchTask>>(updatingSonarProcessWithLSonarTasksDto.SearchTasks);
             foreach (var lesson in sonarTasks)
             {
-                lesson.EventId = 100; //Не существует VDV: Момент смотреть нужна отладка
+                //lesson.EventId = 100; //Не существует VDV: Момент смотреть нужна отладка
+                lesson.EventId = searchEvent.Id;
                 await _searchTaskRepository.AddAsync(lesson);
                 //await _unitOfWork.LessonRepository.AddAsync(lesson);
             }

@@ -31,11 +31,13 @@ namespace Services.Implementations.Mapping
                 .ForMember(d => d.CreatedBy, map => map.Ignore())
                 .ForMember(d => d.Tasks, map => map.Ignore());
 
-            // VDV: Вернуть            
-            //CreateMap<UpdatingSearchEventWithSeacrchTasksDto, SearchEvent>()
-            //    .ForMember(d => d.Id, map => map.Ignore())
-            //    //.ForMember(d => d.Deleted, map => map.Ignore())
-            //    .ForMember(d => d.Tasks, map => map.Ignore());
+            CreateMap<UpdatingSearchEventWithSeacrchTasksDto, SearchEvent>()
+                .ForMember(d => d.Id, map => map.Ignore())
+                .ForMember(d => d.CreatedAt, map => map.Ignore())
+                .ForMember(d => d.UpdatedAt, map => map.Ignore())
+                .ForMember(d => d.Request, map => map.Ignore())
+                .ForMember(d => d.CreatedBy, map => map.Ignore())
+                .ForMember(d => d.Tasks, map => map.Ignore());
         }
     }
 }

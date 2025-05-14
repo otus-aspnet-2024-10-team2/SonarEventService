@@ -18,7 +18,7 @@ namespace Domain.Entities
         /// <summary>
         /// Идентификатор мероприятия, к которому относится задача
         /// </summary>
-        [Column("EventId")]
+        //[Column("EventId")]
         public long EventId { get; set; }
 
         /// <summary>

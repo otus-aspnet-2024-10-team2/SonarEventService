@@ -5,6 +5,10 @@
 GET https://localhost:58309/api/v1/search-events/13
 Content-Type: application/json
 
+### Удаление
+DELETE https://localhost:58309/api/v1/search-events/120
+Content-Type: application/json
+
 ### Создаем мероприятие поиска животного
 POST https://localhost:58309/api/v1/search-events
 Content-Type: application/json
@@ -31,10 +35,61 @@ Content-Type: application/json
 {
   "requestId": 1,
   "createdById": 12,
-  "description": "Поиск кошки Мурка 2",
+  "description": "Поиск кошки Мурка 52",
   "location": "Дом рядом с метро2",
   "status": "выполняется",
   "startTime": "2025-05-14T11:18:16.914Z",
   "endTime": "2025-05-14T11:18:16.914Z"
 }
 
+
+### Обновление c задачами
+GET https://localhost:58309/api/v1/search-events/10
+Content-Type: application/json
+
+###
+PUT https://localhost:58309/api/v1/search-events/WithSearchTasks?eventId=10
+Content-Type: application/json
+
+{
+  "requestId": 1,
+  "createdById": 12,
+  "description": "Поиск кошки Мурка 52",
+  "location": "Дом рядом с метро2",
+  "status": "выполняется",
+  "startTime": "2025-05-14T11:18:16.914Z",
+  "endTime": "2025-05-14T11:18:16.914Z",
+  "searchTasks": [
+    {
+      "eventId": 1,
+      "assignedToId": 12,
+      "title": "stringrrrrrr",
+      "description": "string",
+      "status": "string"
+    }
+  ]
+}
+
+###
+GET https://localhost:58309/api/v1/search-tasks/list/1/10
+Content-Type: application/json
+
+###
+GET https://localhost:58309/api/v1/search-tasks/list/2/10
+Content-Type: application/json
+
+
+###
+GET https://localhost:58309/api/v1/search-tasks/25
+
+###
+POST https://localhost:58309/api/v1/search-tasks
+Content-Type: application/json
+
+{
+  "eventId": 1,
+  "assignedToId": 1,
+  "title": "string",
+  "description": "string",
+  "status": "string"
+}

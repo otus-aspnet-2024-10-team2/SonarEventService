@@ -14,9 +14,8 @@ namespace WebApi.Mapping
             CreateMap<SearchEventDto, SearchEventModel>();
             CreateMap<CreatingSeachEventModel, CreatingSearchEventDto>();
             CreateMap<UpdatingSearchEventModel, UpdatingSearchEventDto>();
-            // VDV: Вернуть
-            //CreateMap<SearchEventFilterModel, SearchEventFilterDto>();
-            //CreateMap<UpdatingSearchEventWithSearchTasksModel, UpdatingSearchEventWithSeacrchTasksDto>();
+            CreateMap<UpdatingSearchEventWithSearchTasksModel, UpdatingSearchEventWithSeacrchTasksDto>();
+            CreateMap<SearchEventFilterModel, SearchEventFilterDto>();
         }
     }
 }

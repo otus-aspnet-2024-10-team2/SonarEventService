@@ -1,4 +1,6 @@
-﻿namespace Services.Contracts.SonarTask
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Services.Contracts.SonarTask
 {
     /// <summary>
     /// ДТО задачи поиска.
@@ -6,13 +8,30 @@
     public class CreatingSearchTaskDto
     {
         /// <summary>
-        /// Идентификатор процесса поиска.
+        /// Идентификатор мероприятия, к которому относится задача
         /// </summary>
-        public long SonarProcessId { get; set; }
+
+        public long EventId { get; set; }
 
         /// <summary>
-        /// Тема.
+        /// Идентификатор пользователя, которому назначена задача
         /// </summary>
-        public string Subject { get; set; }
+        //[Column("AssignedTo")]
+        public long AssignedToId { get; set; }
+
+        /// <summary>
+        /// Заголовок задачи
+        /// </summary>
+        public string Title { get; set; }
+
+        /// <summary>
+        /// Описание задачи
+        /// </summary>
+        public string Description { get; set; }
+
+        /// <summary>
+        /// Статус задачи: назначена / в процессе / завершена / отменена
+        /// </summary>
+        public string Status { get; set; }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace Services.Contracts.SonarTask
+﻿using System;
+
+namespace Services.Contracts.SonarTask
 {
     /// <summary>
     /// ДТО редактируемой задачи поиска.
@@ -6,8 +8,35 @@
     public class UpdatingSearchTaskDto
     {
         /// <summary>
-        /// Тема.
+        /// Идентификатор мероприятия, к которому относится задача
         /// </summary>
-        public string Subject { get; set; }
+        //[Column("EventId")]
+        public long EventId { get; set; }
+
+        /// <summary>
+        /// Идентификатор пользователя, которому назначена задача
+        /// </summary>
+        //[Column("AssignedTo")]
+        public long AssignedToId { get; set; }
+
+        /// <summary>
+        /// Заголовок задачи
+        /// </summary>
+        public string Title { get; set; }
+
+        /// <summary>
+        /// Описание задачи
+        /// </summary>
+        public string Description { get; set; }
+
+        /// <summary>
+        /// Статус задачи: назначена / в процессе / завершена / отменена
+        /// </summary>
+        public string Status { get; set; }
+
+        /// <summary>
+        /// Дата последнего обновления задачи
+        /// </summary>
+        public DateTime UpdatedAt { get; set; }
     }
 }
