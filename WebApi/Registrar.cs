@@ -28,8 +28,8 @@ namespace WebApi
         private static IServiceCollection InstallServices(this IServiceCollection serviceCollection)
         {
             serviceCollection
-                .AddTransient<ISonarProcessService, SonarProcessService>()
-                .AddTransient<ISonarTaskService, SonarTaskService>()
+                .AddTransient<ISearchEventService, SearchEventService>()
+                .AddTransient<ISearchTaskService, SearchTaskService>()
                 .AddTransient<IGroupMemberService, GroupMemberService>()
                 .AddTransient<ISearchGroupService, SearchGroupService>();
             return serviceCollection;
@@ -38,8 +38,8 @@ namespace WebApi
         private static IServiceCollection InstallRepositories(this IServiceCollection serviceCollection)
         {
             serviceCollection
-                .AddTransient<ISonarProcessRepository, SonarProcessRepository>()
-                .AddTransient<ISonarTaskRepository, SonarTaskRepository>()
+                .AddTransient<ISearchEventRepository, SearchEventRepository>()
+                .AddTransient<ISearchTaskRepository, SearchTaskRepository>()
                 .AddTransient<ISearchGroupRepository, SearchGroupRepository>()
                 .AddTransient<IGroupMemberRepository, GroupMemberRepository>()
                 .AddTransient<IUnitOfWork, UnitOfWork>();

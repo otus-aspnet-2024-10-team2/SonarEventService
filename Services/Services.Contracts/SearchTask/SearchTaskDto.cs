@@ -1,14 +1,11 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Domain.Entities
+namespace Services.Contracts.SonarTask
 {
-
-
     /// <summary>
-    /// Сущность задачи по поиску животного
+    /// DTO для представления задачи, назначенной в рамках мероприятия
     /// </summary>
-    public class SearchTask : IEntity<long>
+    public class SearchTaskDto
     {
         /// <summary>
         /// Уникальный идентификатор задачи
@@ -18,13 +15,11 @@ namespace Domain.Entities
         /// <summary>
         /// Идентификатор мероприятия, к которому относится задача
         /// </summary>
-        //[Column("EventId")]
         public long EventId { get; set; }
 
         /// <summary>
         /// Идентификатор пользователя, которому назначена задача
         /// </summary>
-        //[Column("AssignedTo")]
         public long AssignedToId { get; set; }
 
         /// <summary>
@@ -51,17 +46,5 @@ namespace Domain.Entities
         /// Дата последнего обновления задачи
         /// </summary>
         public DateTime UpdatedAt { get; set; }
-
-        // Навигационные свойства
-
-        /// <summary>
-        /// Мероприятие, к которому относится задача
-        /// </summary>
-        public virtual SearchEvent Event { get; set; }
-
-        /// <summary>
-        /// Пользователь, которому назначена задача
-        /// </summary>
-        public virtual User AssignedTo { get; set; }
     }
 }

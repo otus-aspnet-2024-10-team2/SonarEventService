@@ -89,12 +89,12 @@ namespace WebApi
         {
             var configuration = new MapperConfiguration(cfg =>
             {
-                cfg.AddProfile<SonarProcessMappingsProfile>();
-                cfg.AddProfile<SonarTaskMappingsProfile>();
+                cfg.AddProfile<SearchEventMappingsProfile>(); 
+                cfg.AddProfile<SearchTaskMappingsProfile>(); 
                 cfg.AddProfile<SearchGroupMappingProfile>();
                 cfg.AddProfile<GroupMemberMappingProfile>();
-                cfg.AddProfile<Services.Implementations.Mapping.SonarProcessMappingsProfile>();
-                cfg.AddProfile<Services.Implementations.Mapping.SonarTaskMappingsProfile>();
+                cfg.AddProfile<Services.Implementations.Mapping.SearchEventMappingsProfile>(); 
+                cfg.AddProfile<Services.Implementations.Mapping.SearchTaskMappingsProfile>();
                 cfg.AddProfile<Services.Implementations.Mapping.SearchGroupMappingsProfile>();
                 cfg.AddProfile<Services.Implementations.Mapping.GroupMemberMappingsProfile>();
             });

@@ -9,18 +9,18 @@ namespace Infrastructure.Repositories.Implementations;
 /// </summary>
 public class UnitOfWork: IUnitOfWork
 {
-    private ISonarProcessRepository _courseRepository;
-    private ISonarTaskRepository _lessonRepository;
+    private ISearchEventRepository _courseRepository;
+    private ISearchTaskRepository _lessonRepository;
     private DatabaseContext _context;
 
-    public ISonarProcessRepository CourseRepository => _courseRepository;
-    public ISonarTaskRepository LessonRepository => _lessonRepository;
+    public ISearchEventRepository SearchEventRepository => _courseRepository;
+    public ISearchTaskRepository SearchTaskRepository => _lessonRepository;
 
     public UnitOfWork(DatabaseContext context)
     {
         _context = context;
-        _lessonRepository = new SonarTaskRepository(context);
-        _courseRepository = new SonarProcessRepository(context);
+        _lessonRepository = new SearchTaskRepository(context);
+        _courseRepository = new SearchEventRepository(context);
     }
 
     public async Task SaveChangesAsync()
