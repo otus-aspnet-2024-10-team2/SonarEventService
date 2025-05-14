@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Services.Contracts.Animal;
+using Services.Contracts.User;
+using System;
 
 namespace Services.Contracts.SearchAnnouncement;
 
@@ -43,4 +45,19 @@ public class SearchAnnouncementDto
     /// Дата последнего обновления задачи
     /// </summary>
     public DateTime UpdatedAt { get; set; }
+
+    /// <summary>
+    /// Животное, связанное с объявлением
+    /// </summary>
+    public AnimalDto Animal { get; set; }
+
+    /// <summary>
+    /// Владелец объявления
+    /// </summary>
+    public UserDto Owner { get; set; }
+
+    /// <summary>
+    /// Заявки, связанные с этим объявлением
+    /// </summary>
+    //public List<SearchRequestDto> SearchRequests { get; set; } = new List<SearchRequestDto>();
 }

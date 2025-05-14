@@ -95,12 +95,14 @@ namespace WebApi
                 cfg.AddProfile<GroupMemberMappingProfile>();
                 cfg.AddProfile<UserMappingProfile>();
                 cfg.AddProfile<AnimalMappingProfile>();
+                cfg.AddProfile<SearchAnnouncementMappingProfile>();                
                 cfg.AddProfile<Services.Implementations.Mapping.SearchEventMappingsProfile>(); 
                 cfg.AddProfile<Services.Implementations.Mapping.SearchTaskMappingsProfile>();
                 cfg.AddProfile<Services.Implementations.Mapping.SearchGroupMappingsProfile>();
                 cfg.AddProfile<Services.Implementations.Mapping.GroupMemberMappingsProfile>();
                 cfg.AddProfile<Services.Implementations.Mapping.UserMappingsProfile>();
                 cfg.AddProfile<Services.Implementations.Mapping.AnimalMappingsProfile>();
+                cfg.AddProfile<Services.Implementations.Mapping.SearchAnnouncementMappingsProfile>();
             });
             configuration.AssertConfigurationIsValid();
             return configuration;

@@ -5,11 +5,6 @@ namespace Services.Contracts.SearchAnnouncement;
 public class UpdatingSearchAnnouncementDto
 {
     /// <summary>
-    /// Уникальный идентификатор объявления
-    /// </summary>
-    public long Id { get; set; }
-
-    /// <summary>
     /// Идентификатор животного, связанного с объявлением
     /// </summary>
     public long AnimalId { get; set; }

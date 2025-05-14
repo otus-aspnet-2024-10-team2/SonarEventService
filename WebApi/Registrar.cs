@@ -32,6 +32,7 @@ namespace WebApi
                 .AddTransient<ISearchTaskService, SearchTaskService>()
                 .AddTransient<IGroupMemberService, GroupMemberService>()
                 .AddTransient<ISearchGroupService, SearchGroupService>()
+                .AddTransient<ISearchAnnouncementService, SearchAnnouncementService>()
                 .AddTransient<IAnimalService, AnimalService>()
                 .AddTransient<IUserService, UserService>();
             return serviceCollection;
@@ -44,6 +45,7 @@ namespace WebApi
                 .AddTransient<ISearchTaskRepository, SearchTaskRepository>()
                 .AddTransient<ISearchGroupRepository, SearchGroupRepository>()
                 .AddTransient<IGroupMemberRepository, GroupMemberRepository>()
+                .AddTransient<ISearchAnnouncementRepository, SearchAnnouncementRepository>()
                 .AddTransient<IUserRepository, UserRepository>()
                 .AddTransient<IAnimalRepository, AnimalRepository>()
                 .AddTransient<IUnitOfWork, UnitOfWork>();

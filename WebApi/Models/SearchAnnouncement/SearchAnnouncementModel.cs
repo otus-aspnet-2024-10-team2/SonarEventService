@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Domain.Entities;
+using System;
+using System.Collections.Generic;
+using WebApi.Models.Animal;
+using WebApi.Models.User;
 
 namespace WebApi.Models.SearchAnnouncement;
 
@@ -46,4 +50,19 @@ public class SearchAnnouncementModel
     /// Дата последнего обновления задачи
     /// </summary>
     public DateTime UpdatedAt { get; set; }
+
+    /// <summary>
+    /// Животное, связанное с объявлением
+    /// </summary>
+    public AnimalModel Animal { get; set; }
+
+    /// <summary>
+    /// Владелец объявления
+    /// </summary>
+    public UserModel Owner { get; set; }
+
+    /// <summary>
+    /// Заявки, связанные с этим объявлением
+    /// </summary>
+    //public List<SearchRequestModel> SearchRequests { get; set; } = new List<SearchRequestModel>();
 }
