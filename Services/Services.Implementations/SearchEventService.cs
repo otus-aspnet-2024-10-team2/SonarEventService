@@ -108,16 +108,25 @@ namespace Services.Implementations
         /// <param name="updatingCourseDto"> ДТО редактируемого процесса поиска. </param>
         public async Task UpdateAsync(long id, UpdatingSearchEventDto updatingCourseDto)
         {
-            var sonarProcess = await _searchEventRepository.GetAsync(id, CancellationToken.None);
-            if (sonarProcess == null)
+            var searchEvent = await _searchEventRepository.GetAsync(id, CancellationToken.None);
+            if (searchEvent == null)
             {
                 throw new Exception($"Мероприятие поиска с идентфикатором {id} не найден");
             }
 
             // VDV: Настроить под новые данные
+
+            searchEvent.RequestId = updatingCourseDto.RequestId;
+            searchEvent.CreatedById = updatingCourseDto.CreatedById;
+            searchEvent.Description = updatingCourseDto.Description;
+            searchEvent.Location = updatingCourseDto.Location;
+            searchEvent.Status = updatingCourseDto.Status;
+            searchEvent.StartTime = updatingCourseDto.StartTime;
+            searchEvent.EndTime = updatingCourseDto.EndTime;
+
             //sonarProcess.Name = updatingCourseDto.Name;
             //sonarProcess.Price = updatingCourseDto.Price;
-            _searchEventRepository.Update(sonarProcess);
+            _searchEventRepository.Update(searchEvent);
             await _searchEventRepository.SaveChangesAsync();
         }
 

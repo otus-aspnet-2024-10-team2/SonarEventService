@@ -1,7 +1,7 @@
 // файл для проверки API, используется в VS Code или прям и VS дополнение к Swager
 // В VS Code нужно установить Rest Client  от автора Huachao Mao
 
-###
+### Добавление
 GET https://localhost:58309/api/v1/search-events/13
 Content-Type: application/json
 
@@ -18,3 +18,23 @@ Content-Type: application/json
   "startTime": "2025-05-14T09:50:17.580Z",
   "endTime": "2025-06-14T09:50:17.580Z"
 }
+
+
+### Обновление
+GET https://localhost:58309/api/v1/search-events/1
+Content-Type: application/json
+
+### Создаем мероприятие поиска животного
+PUT https://localhost:58309/api/v1/search-events/1
+Content-Type: application/json
+
+{
+  "requestId": 1,
+  "createdById": 12,
+  "description": "Поиск кошки Мурка 2",
+  "location": "Дом рядом с метро2",
+  "status": "выполняется",
+  "startTime": "2025-05-14T11:18:16.914Z",
+  "endTime": "2025-05-14T11:18:16.914Z"
+}
+
