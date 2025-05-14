@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.EntityFramework.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20250513181557_Initial")]
+    [Migration("20250514075450_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -173,7 +173,7 @@ namespace Infrastructure.EntityFramework.Migrations
                         .HasColumnType("TEXT")
                         .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
-                    b.Property<long>("CreatedBy")
+                    b.Property<long>("CreatedById")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Description")
@@ -204,7 +204,7 @@ namespace Infrastructure.EntityFramework.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CreatedBy");
+                    b.HasIndex("CreatedById");
 
                     b.HasIndex("RequestId");
 
@@ -417,9 +417,9 @@ namespace Infrastructure.EntityFramework.Migrations
 
             modelBuilder.Entity("Domain.Entities.SearchEvent", b =>
                 {
-                    b.HasOne("Domain.Entities.User", "Creator")
+                    b.HasOne("Domain.Entities.User", "CreatedBy")
                         .WithMany("CreatedEvents")
-                        .HasForeignKey("CreatedBy")
+                        .HasForeignKey("CreatedById")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -429,7 +429,7 @@ namespace Infrastructure.EntityFramework.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Creator");
+                    b.Navigation("CreatedBy");
 
                     b.Navigation("Request");
                 });

@@ -125,7 +125,7 @@ namespace Infrastructure.EntityFramework.Migrations
                     Id = table.Column<long>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     RequestId = table.Column<long>(type: "INTEGER", nullable: false),
-                    CreatedBy = table.Column<long>(type: "INTEGER", nullable: false),
+                    CreatedById = table.Column<long>(type: "INTEGER", nullable: false),
                     Description = table.Column<string>(type: "TEXT", maxLength: 1024, nullable: true),
                     Location = table.Column<string>(type: "TEXT", maxLength: 500, nullable: true),
                     Status = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
@@ -144,8 +144,8 @@ namespace Infrastructure.EntityFramework.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_SearchEvents_Users_CreatedBy",
-                        column: x => x.CreatedBy,
+                        name: "FK_SearchEvents_Users_CreatedById",
+                        column: x => x.CreatedById,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -270,9 +270,9 @@ namespace Infrastructure.EntityFramework.Migrations
                 column: "Status");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SearchEvents_CreatedBy",
+                name: "IX_SearchEvents_CreatedById",
                 table: "SearchEvents",
-                column: "CreatedBy");
+                column: "CreatedById");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SearchEvents_RequestId",

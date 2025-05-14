@@ -23,7 +23,7 @@ namespace WebApi.Models.SearchEvent
         /// <summary>
         /// Идентификатор пользователя, создавшего мероприятие
         /// </summary>
-        public long CreatedByUserId { get; set; }
+        public long CreatedById { get; set; }
 
         /// <summary>
         /// Описание мероприятия

@@ -13,7 +13,7 @@ namespace WebApi.Controllers.Helper
             {
                 Id = 1L,
                 RequestId = 101L,
-                CreatedByUserId = 5L,
+                CreatedById = 5L,
                 Description = "Поиск пропавшей собаки породы лабрадор в районе парка Горького",
                 Location = "Парк Горького, Москва",
                 Status = "в процессе",

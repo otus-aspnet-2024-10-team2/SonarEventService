@@ -32,7 +32,7 @@ INSERT INTO Users (Id, Username, ShortName, FullName, CreatedAt, UpdatedAt) VALU
 (18, 'vol7', 'Катя А.', 'Екатерина Андреева', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 (19, 'vol8', 'Ольга П.', 'Ольга Петрова', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 (20, 'vol9', 'Таня С.', 'Татьяна Соколова', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
--- select * from Users 
+select * from Users 
 
 -- ДЕМО ДАННЫЕ: select * from Animals
 -- Добавляем животных для пользователя с Id = 1 (john_doe)
@@ -48,7 +48,7 @@ VALUES
 ('Лютик', 'Кролик', 'Голландский', 'Белый с черным пятном на лбу', 'CHIP0015', 8, 'Детский парк', 'Маленький и проворный', 'https://example.com/photo15.jpg '),
 ('Джек', 'Собака', 'Пудель', 'Белый', 'CHIP0017', 9, 'Сквер возле школы', 'Обучаемый, выполняет команды', 'https://example.com/photo17.jpg '),
 ('Чарли', 'Кошка', 'Шотландская вислоухая', 'Серая', 'CHIP0020', 10, 'Балкон', 'Очень милая и ласковая', 'https://example.com/photo20.jpg ');
--- ДЕМО ДАННЫЕ: select * from Animals
+select * from Animals
 
 -- select * from SearchAnnouncements 
 -- Демо данные в таблице
@@ -70,7 +70,8 @@ VALUES
 -- Отклонённые объявления (например, некорректные или отменённые)
 (4, 4, 'Кот Барсик потерялся, но информация оказалась ошибочной.', 'Квартира на проспекте', 'отклонен'),
 (8, 8, 'Кролик Лютик потерялся, но данные были неполными.', 'Детский парк', 'отклонен');
--- select * from SearchAnnouncements 
+
+ select * from SearchAnnouncements 
 
 -- ###################### SearchRequests - Таблица для хранения заявок на поиск. 
 -- Заявки по активным объявлениям Демо данные
@@ -88,7 +89,7 @@ VALUES
 (8, 11, 'Поиск#8 - Ошибка в объявлении — данные неполные', 'отклонен'),
 (9, 11, 'Поиск#9', 'активен'),
 (10, 11, 'Поиск#10 - Нет возможности участвовать, мало информации', 'отклонен');
--- select * from SearchAnnouncements
+ select * from SearchAnnouncements
 
 -- ###################### SearchGroups - Таблица для хранения групп поиска. 
 -- ДЕМО ДАННЫЕ
@@ -107,7 +108,7 @@ VALUES
 (8, 15),
 (9, 12),
 (10, 15);
--- select * from SearchGroups
+ select * from SearchGroups
 
 -- ###################### GroupMembers - Таблица для хранения участников групп поиска.
 -- DROP TABLE GroupMembers
@@ -156,13 +157,13 @@ INSERT INTO GroupMembers (GroupId, UserId, Role) VALUES
 (10, 15, 'leader'),
 (10, 19, 'volunteer'),
 (10, 13, 'volunteer');
-
+select * from SearchGroups
 -- ###################### SearchEvents - Таблица для хранения мероприятий поиска
 -- Демо данные 
 -- select * from SearchRequests 
 -- select * from SearchGroups 
 -- select * from SearchEvents
-INSERT INTO SearchEvents (RequestId, CreatedBy, Description, Location, StartTime, EndTime, Status)
+INSERT INTO SearchEvents (RequestId, CreatedById, Description, Location, StartTime, EndTime, Status)
 VALUES
 -- RequestId = 1
 (1, 12, 'Поиск кошки Мурка', 'Дом рядом с метро', '2025-04-05 09:00:00', '2025-04-05 13:00:00', 'выполняется'),
@@ -184,7 +185,7 @@ VALUES
 (9, 12, 'Сбор добровольцев для поиска', 'Парк недалеко от дома', '2025-04-11 10:00:00', '2025-04-11 14:00:00', 'планируется'),
 -- RequestId = 10
 (10, 15, 'Изучение информации о последнем местонахождении', 'Магазин у балкона', '2025-04-06 13:00:00', '2025-04-06 15:00:00', 'остановлено');
-
+ select * from SearchEvents
 -- ###################### SearchTasks - Таблица для хранения задач поиска
 
 -- Добавляю поля (в процессе отладки после пересоздания можно удалить)
@@ -198,6 +199,7 @@ INSERT INTO SearchTasks (EventId, AssignedToId, Title, Description, Status)
 VALUES
 -- EventId = 1
 (1, 12, 'Расспросить соседей', 'Узнать, видели ли кто-нибудь кошку Мурка', 'в процессе'),
+(1, 12, 'Пройти чердаки и подвалы', 'Посмотреть в окресностях', 'в процессе'),
 -- EventId = 2
 (2, 15, 'Обзвон приютов', 'Позвонить в ближайшие приюты', 'назначена'),
 -- EventId = 3
@@ -216,4 +218,4 @@ VALUES
 (9, 18, 'Сбор добровольцев', 'Назначить встречу для распределения задач', 'назначена'),
 -- EventId = 10
 (10, 13, 'Фотофиксация местности', 'Сделать фотографии района последнего местонахождения', 'в процессе');
-
+select * from SearchTasks

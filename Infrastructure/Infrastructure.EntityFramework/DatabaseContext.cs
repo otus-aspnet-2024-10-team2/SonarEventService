@@ -60,7 +60,10 @@ namespace Infrastructure.EntityFramework
         {
             base.OnModelCreating(modelBuilder);
             /* Команды:
+               -- сначала запускаем формирование классов, перед этим нужно удалить файлы в папке ..\Migrations
+                -- запускаем в Консоль диспетчера пакетов
                add-migration Initial
+                -- потом создаем базу, т.к. в рамках проекта будет только 0 миграция то нужно удалить файл БД или переименовать его иначе будут ошибки
                Update-database
              */
             // связи сущностей
@@ -137,9 +140,9 @@ namespace Infrastructure.EntityFramework
 
             // SearchEvent → User (CreatedBy)
             modelBuilder.Entity<SearchEvent>()
-                .HasOne(se => se.Creator)
+                .HasOne(se => se.CreatedBy)
                 .WithMany(u => u.CreatedEvents)
-                .HasForeignKey(se => se.CreatedBy)
+                .HasForeignKey(se => se.CreatedById)
                 .OnDelete(DeleteBehavior.Restrict);
 
             // SearchTask → SearchEvent (EventId)
@@ -173,7 +176,7 @@ namespace Infrastructure.EntityFramework
             modelBuilder.Entity<GroupMember>().HasIndex(c => c.GroupId);
 
             modelBuilder.Entity<SearchEvent>().HasIndex(c => c.RequestId);
-            modelBuilder.Entity<SearchEvent>().HasIndex(c => c.CreatedBy);
+            modelBuilder.Entity<SearchEvent>().HasIndex(c => c.CreatedById);
             modelBuilder.Entity<SearchEvent>().HasIndex(c => c.StartTime);
             modelBuilder.Entity<SearchEvent>().HasIndex(c => c.Status);
 

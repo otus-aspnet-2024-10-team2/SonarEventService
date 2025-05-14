@@ -23,7 +23,7 @@ namespace Domain.Entities
         /// <summary>
         /// Идентификатор пользователя, создавшего мероприятие
         /// </summary>
-        public long CreatedBy { get; set; }
+        public long CreatedById { get; set; }
 
         /// <summary>
         /// Описание мероприятия (1024 знака)
@@ -70,7 +70,7 @@ namespace Domain.Entities
         /// <summary>
         /// Пользователь, создавший мероприятие
         /// </summary>
-        public virtual User Creator { get; set; }
+        public virtual User CreatedBy { get; set; }
 
         /// <summary>
         /// Список задач, связанных с этим мероприятием

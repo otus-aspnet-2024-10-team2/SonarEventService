@@ -12,10 +12,11 @@ namespace WebApi.Mapping
         public SearchEventMappingsProfile()
         {
             CreateMap<SearchEventDto, SearchEventModel>();
-            CreateMap<CreatingSeachEventModel, CreatingSearchEventDto>();
-            CreateMap<UpdatingSearchEventModel, UpdatingSearchEventDto>();
-            CreateMap<SearchEventFilterModel, SearchEventFilterDto>();
-            CreateMap<UpdatingSearchEventWithSearchTasksModel, UpdatingSearchEventWithSeacrchTasksDto>();
+            // VDV: Вернуть
+            //CreateMap<CreatingSeachEventModel, CreatingSearchEventDto>();
+            //CreateMap<UpdatingSearchEventModel, UpdatingSearchEventDto>();
+            //CreateMap<SearchEventFilterModel, SearchEventFilterDto>();
+            //CreateMap<UpdatingSearchEventWithSearchTasksModel, UpdatingSearchEventWithSeacrchTasksDto>();
         }
     }
 }
