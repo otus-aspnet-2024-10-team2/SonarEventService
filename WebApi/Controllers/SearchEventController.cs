@@ -30,9 +30,7 @@ namespace WebApi.Controllers
         {
             var res = _mapper.Map<SearchEventModel>(await _service.GetByIdAsync(eventId));
             return Ok(res);
-
-            //return Ok((SearchEventModel)CDH.GetTestSearchEventModel());  // ОТЛАДКА УДАЛИТЬ
-
+            //return Ok((SearchEventModel)CDH.GetTestSearchEventModel());  // ОТЛАДКА 
         }
 
         [HttpPost]

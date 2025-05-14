@@ -7,9 +7,9 @@ namespace WebApi.Mapping
     /// <summary>
     /// Профиль автомаппера для сущности процесска поиска.
     /// </summary>
-    public class SonarTaskMappingsProfile : Profile
+    public class SearchTaskMappingsProfile : Profile
     {
-        public SonarTaskMappingsProfile()
+        public SearchTaskMappingsProfile()
         {
             CreateMap<SearchTaskDto, SearchTaskModel>()
                 //.ForMember(d => d.AssignedToId, map => map.MapFrom(m => m.AssignedTo))
