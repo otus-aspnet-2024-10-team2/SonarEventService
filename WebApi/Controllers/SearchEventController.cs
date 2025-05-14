@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Services.Contracts.SonarProcess;
 using WebApi.Models.SearchEvent;
-using CDH = WebApi.Controllers.Helper.ControllerDebugHelper;
 
 namespace WebApi.Controllers
 {

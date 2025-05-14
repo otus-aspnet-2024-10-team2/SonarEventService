@@ -2,7 +2,7 @@
 // В VS Code нужно установить Rest Client  от автора Huachao Mao
 
 ### Добавление
-GET https://localhost:58309/api/v1/search-events/13
+GET https://localhost:58309/api/v1/search-events/10
 Content-Type: application/json
 
 ### Удаление
@@ -71,6 +71,26 @@ Content-Type: application/json
 }
 
 ###
+POST https://localhost:58309/api/v1/search-events/list
+Content-Type: application/json
+
+{
+  "status": null,
+  "itemsPerPage": 10,
+  "page": 1
+}
+
+###
+POST https://localhost:58309/api/v1/search-events/list
+Content-Type: application/json
+
+{
+  "status": "выполняется",
+  "itemsPerPage": 10,
+  "page": 1
+}
+
+### ЗАДАЧИ
 GET https://localhost:58309/api/v1/search-tasks/list/1/10
 Content-Type: application/json
 
@@ -80,7 +100,10 @@ Content-Type: application/json
 
 
 ###
-GET https://localhost:58309/api/v1/search-tasks/27
+GET https://localhost:58309/api/v1/search-tasks/26
+
+###
+DELETE https://localhost:58309/api/v1/search-tasks/13
 
 ###
 POST https://localhost:58309/api/v1/search-tasks

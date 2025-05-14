@@ -7,9 +7,9 @@ namespace Services.Repositories.Abstractions
     /// </summary>
     public interface IUnitOfWork
     {
-        ISearchTaskRepository LessonRepository { get; }
+        ISearchTaskRepository SearchTaskRepository { get; }
 
-        ISearchEventRepository CourseRepository { get; }
+        ISearchEventRepository SearchEventRepository { get; }
 
         Task SaveChangesAsync();
     }

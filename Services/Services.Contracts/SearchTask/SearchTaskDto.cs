@@ -47,19 +47,4 @@ namespace Services.Contracts.SonarTask
         /// </summary>
         public DateTime UpdatedAt { get; set; }
     }
-    ///// <summary>
-    ///// ДТО задачи поиска.
-    ///// </summary>
-    //public class SearchTaskDto
-    //{
-    //    /// <summary>
-    //    /// Идентификатор.
-    //    /// </summary>
-    //    public long Id { get; set; }
-
-    //    /// <summary>
-    //    /// Тема.
-    //    /// </summary>
-    //    public string Subject { get; set; }
-    //}
 }

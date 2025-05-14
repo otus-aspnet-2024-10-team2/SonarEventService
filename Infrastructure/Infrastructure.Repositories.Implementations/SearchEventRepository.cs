@@ -38,20 +38,11 @@ namespace Infrastructure.Repositories.Implementations
         /// <returns> Список процессов поиска. </returns>
         public async Task<List<SearchEvent>> GetPagedAsync(SearchEventFilterDto filterDto)
         {
-            // VDV: Операция чтения не оптимальна требует доработки
             var query = GetAll();
-                //.ToList().AsQueryable()
-                //.Where(c => !c.Deleted);
-                //.Include(c => c.Lessons).AsQueryable();
-            if (!string.IsNullOrWhiteSpace(filterDto.Name))
+            if (!string.IsNullOrWhiteSpace(filterDto.Status))
             {
-                query = query.Where(c => c.Status == filterDto.Name); // VDV: Требует доработки пока для отладки
+                query = query.Where(c => c.Status == filterDto.Status); 
             }
-            
-            //if (filterDto.Price.HasValue && filterDto.Price != 0)
-            //{
-            //    query = query.Where(c => c.Price == filterDto.Price);
-            //}
 
             query = query
                 .Skip((filterDto.Page - 1) * filterDto.ItemsPerPage)

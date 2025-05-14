@@ -26,12 +26,10 @@ namespace Infrastructure.Repositories.Implementations
         /// <returns> Задача поиска. </returns>
         public override async Task<SearchTask> GetAsync(long id, CancellationToken cancellationToken)
         {
-            //await Task.Delay(TimeSpan.FromSeconds(20)); // VDV: Причесать
             var query = _context.Set<SearchTask>().AsQueryable();
             query = query.Where(l => l.Id == id );
             var res = await query.SingleOrDefaultAsync();
             return res;
-            //return await query.SingleOrDefaultAsync(cancellationToken);
         }
         
         /// <summary>
@@ -42,7 +40,7 @@ namespace Infrastructure.Repositories.Implementations
         /// <returns> Список задач поиска. </returns>
         public async Task<List<SearchTask>> GetPagedAsync(int page, int itemsPerPage)
         {
-            var query = GetAll();//.Where(l => !l.Deleted);
+            var query = GetAll();
             return await query
                 .Skip((page - 1) * itemsPerPage)
                 .Take(itemsPerPage)

@@ -13,8 +13,8 @@ public class UnitOfWork: IUnitOfWork
     private ISearchTaskRepository _lessonRepository;
     private DatabaseContext _context;
 
-    public ISearchEventRepository CourseRepository => _courseRepository;
-    public ISearchTaskRepository LessonRepository => _lessonRepository;
+    public ISearchEventRepository SearchEventRepository => _courseRepository;
+    public ISearchTaskRepository SearchTaskRepository => _lessonRepository;
 
     public UnitOfWork(DatabaseContext context)
     {

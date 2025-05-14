@@ -67,13 +67,3 @@ public class SearchRequest : IEntity<long>
     /// </summary>
     public virtual List<SearchEvent> Events { get; set; } = new List<SearchEvent>();
 }
-
-///// <summary>
-///// Запрос на поиск
-///// </summary>
-//public class SearchRequest : IEntity<long>
-//{
-//    public long Id { get; set; }
-
-//    //TODO: Other properties
-//}

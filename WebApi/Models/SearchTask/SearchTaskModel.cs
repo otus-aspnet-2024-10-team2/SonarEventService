@@ -47,16 +47,5 @@ namespace WebApi.Models.SearchTask
         /// </summary>
         public DateTime UpdatedAt { get; set; }
     }
-    //public class SearchTaskModel
-    //{
-    //    /// <summary>
-    //    /// Идентификатор.
-    //    /// </summary>
-    //    public long Id { get; set; }
 
-    //    /// <summary>
-    //    /// Тема.
-    //    /// </summary>
-    //    public string Subject { get; set; }
-    //}
 }

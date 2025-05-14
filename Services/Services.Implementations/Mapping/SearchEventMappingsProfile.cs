@@ -19,8 +19,7 @@ namespace Services.Implementations.Mapping
                 .ForMember(d => d.UpdatedAt, map => map.Ignore())
                 .ForMember(d => d.Request, map => map.Ignore())
                 .ForMember(d => d.CreatedBy, map => map.Ignore())
-                .ForMember(d => d.Tasks, map => map.Ignore())
-            ;
+                .ForMember(d => d.Tasks, map => map.Ignore());
 
             CreateMap<UpdatingSearchEventDto, SearchEvent>()
                 .ForMember(d => d.Id, map => map.Ignore())

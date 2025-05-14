@@ -38,7 +38,7 @@ namespace Services.Implementations
         }
 
         /// <summary>
-        /// Получить мероприятие пика питомца
+        /// Получить мероприятие поиска питомца
         /// </summary>
         /// <param name="id"> Идентификатор. </param>
         /// <returns>ДТО меропирятия</returns>
@@ -70,36 +70,35 @@ namespace Services.Implementations
         
         /// <summary>
         /// Обновить процесс и состав задач.
-        /// Для показа unit of work.
         /// </summary>
-        /// <param name="updatingSonarProcessWithLSonarTasksDto"> ДТО редактируемого процесса. </param>
+        /// <param name="updatingSearchEventWithSeacrchTasksDto"> ДТО редактируемого мероприятия. </param>
         /// <param name="id"> Id </param>
-        public async Task UpdatingWithSonarTasksAsync(long id, UpdatingSearchEventWithSeacrchTasksDto updatingSonarProcessWithLSonarTasksDto)
+        public async Task UpdatingWithSonarTasksAsync(long id, UpdatingSearchEventWithSeacrchTasksDto updatingSearchEventWithSeacrchTasksDto)
         {
-            //var course = await _unitOfWork.CourseRepository.GetAsync(id, CancellationToken.None);
             var searchEvent = await _searchEventRepository.GetAsync(id, CancellationToken.None);
             if (searchEvent == null)
             {
                 throw new Exception($"Курс с идентфикатором {id} не найден");
             }
 
-            // VDV: Настроить под новые данные
-            //sonarProcess.Name = updatingSonarProcessWithLSonarTasksDto.Name;
-            //sonarProcess.Price = updatingSonarProcessWithLSonarTasksDto.Price;
+            searchEvent.RequestId = updatingSearchEventWithSeacrchTasksDto.RequestId;
+            searchEvent.CreatedById = updatingSearchEventWithSeacrchTasksDto.CreatedById;
+            searchEvent.Description = updatingSearchEventWithSeacrchTasksDto.Description;
+            searchEvent.Location = updatingSearchEventWithSeacrchTasksDto.Location;
+            searchEvent.Status = updatingSearchEventWithSeacrchTasksDto.Status;
+            searchEvent.StartTime = updatingSearchEventWithSeacrchTasksDto.StartTime;
+            searchEvent.EndTime = updatingSearchEventWithSeacrchTasksDto.EndTime;
+
             _searchEventRepository.Update(searchEvent);
             await _searchEventRepository.SaveChangesAsync();
-            //_unitOfWork.CourseRepository.Update(course);
-            var sonarTasks = _mapper.Map<IEnumerable<AttachingSearchTasksDto>, IEnumerable<SearchTask>>(updatingSonarProcessWithLSonarTasksDto.SearchTasks);
+            var sonarTasks = _mapper.Map<IEnumerable<AttachingSearchTasksDto>, IEnumerable<SearchTask>>(updatingSearchEventWithSeacrchTasksDto.SearchTasks);
             foreach (var lesson in sonarTasks)
             {
-                //lesson.EventId = 100; //Не существует VDV: Момент смотреть нужна отладка
                 lesson.EventId = searchEvent.Id;
                 await _searchTaskRepository.AddAsync(lesson);
-                //await _unitOfWork.LessonRepository.AddAsync(lesson);
             }
             
             await _searchTaskRepository.SaveChangesAsync();
-            //await _unitOfWork.SaveChangesAsync();
         }
 
         /// <summary>
@@ -115,8 +114,6 @@ namespace Services.Implementations
                 throw new Exception($"Мероприятие поиска с идентфикатором {id} не найден");
             }
 
-            // VDV: Настроить под новые данные
-
             searchEvent.RequestId = updatingCourseDto.RequestId;
             searchEvent.CreatedById = updatingCourseDto.CreatedById;
             searchEvent.Description = updatingCourseDto.Description;
@@ -125,8 +122,6 @@ namespace Services.Implementations
             searchEvent.StartTime = updatingCourseDto.StartTime;
             searchEvent.EndTime = updatingCourseDto.EndTime;
 
-            //sonarProcess.Name = updatingCourseDto.Name;
-            //sonarProcess.Price = updatingCourseDto.Price;
             _searchEventRepository.Update(searchEvent);
             await _searchEventRepository.SaveChangesAsync();
         }
@@ -144,14 +139,6 @@ namespace Services.Implementations
                 throw new Exception($"Мероприятие поиска с идентфикатором {id} не удалена!");
             }
             await _searchEventRepository.SaveChangesAsync();
-
-            //var searchGroup = await _searchGroupRepository.GetAsync(id, CancellationToken.None);
-            //var deleted = _searchGroupRepository.Delete(id);
-            //if (!deleted)
-            //{
-            //    throw new Exception($"Группа поиска с идентфикатором {id} не удалена!");
-            //}
-            //await _searchGroupRepository.SaveChangesAsync();
         }
         
         /// <summary>

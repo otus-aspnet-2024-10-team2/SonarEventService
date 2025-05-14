@@ -10,14 +10,12 @@ namespace WebApi.Models.SearchTask
         /// <summary>
         /// Идентификатор мероприятия, к которому относится задача
         /// </summary>
-        //[Column("EventId")]
         public long EventId { get; set; }
 
         /// <summary>
         /// Идентификатор пользователя, которому назначена задача
         /// </summary>
-        //[Column("AssignedTo")]
-        public long AssignedToId { get; set; }
+         public long AssignedToId { get; set; }
 
         /// <summary>
         /// Заголовок задачи

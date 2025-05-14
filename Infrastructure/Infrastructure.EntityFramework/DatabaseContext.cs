@@ -235,44 +235,6 @@ namespace Infrastructure.EntityFramework
             modelBuilder.Entity<User>().Property(c => c.FullName).HasMaxLength(100);
             modelBuilder.Entity<User>().Property(d => d.CreatedAt).HasDefaultValueSql("CURRENT_TIMESTAMP");
             modelBuilder.Entity<User>().Property(d => d.UpdatedAt).HasDefaultValueSql("CURRENT_TIMESTAMP");
-
-
-            // VDV: Прошлое удалить после стабилизации
-
-            //modelBuilder.Entity<SearchTask>(entity =>
-            //{
-            //    entity.HasOne(t => t.Event)
-            //          .WithMany(e => e.Tasks)
-            //          .HasForeignKey(t => t.EventId)
-            //          //.OnDelete(DeleteBehavior.Restrict)
-            //          ; // или Cascade, если нужно
-            //});
-
-
-            //modelBuilder.Entity<SearchEvent>()
-            //    .HasMany(u => u.SearchTasks)
-            //    .WithOne(c=> c.Event)
-            //    .IsRequired();
-
-            //    modelBuilder.Entity<>()
-            //.Property(d => d.Created)
-            //.HasDefaultValueSql("CURRENT_TIMESTAMP");
-
-            //modelBuilder.Entity<SearchGroup>()
-            //    .Property(d => d.UpdatedAt)
-            //    .HasDefaultValueSql("CURRENT_TIMESTAMP")
-            //    .ValueGeneratedOnUpdate(); // PostgreSQL поддерживает это через триггеры
-
-            //modelBuilder.Entity<SearchGroup>()
-            //    .HasMany(u => u.Members)
-            //    .WithOne(c => c.Group)
-            //    .IsRequired();
-
-
-            //modelBuilder.Entity<Course>().HasIndex(c=>c.Name);
-
-            //modelBuilder.Entity<SearchEvent>().Property(c => c.Status).HasMaxLength(100);
-            //modelBuilder.Entity<SearchTask>().Property(c => c.Subject).HasMaxLength(100);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -286,7 +248,6 @@ namespace Infrastructure.EntityFramework
 
             foreach (var entry in entries)
             {
-                // VDV: сделать тоже самое для остальных обьектов 
                 if (entry.Entity is SearchGroup group)
                 {
                     var now = DateTime.UtcNow;

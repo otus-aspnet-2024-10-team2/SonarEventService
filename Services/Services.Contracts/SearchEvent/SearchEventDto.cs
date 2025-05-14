@@ -65,29 +65,4 @@ namespace Services.Contracts.SonarProcess
         public List<SearchTaskDto> Tasks { get; set; } = new List<SearchTaskDto>();
     }
 
-    ///// <summary>
-    ///// ДТО мероприятия поиска.
-    ///// </summary>
-    //public class SearchEventDto
-    //{
-    //    /// <summary>
-    //    /// Id.
-    //    /// </summary>
-    //    public long Id { get; set; }
-
-    //    /// <summary>
-    //    /// Название.
-    //    /// </summary>
-    //    public string Name { get; set; }
-
-    //    ///// <summary>
-    //    ///// Стоимость.
-    //    ///// </summary>
-    //    //public decimal Price { get; set; }
-
-    //    /// <summary>
-    //    /// Задачи
-    //    /// </summary>
-    //    public List<SearchTaskDto> SearchTasks { get; set; }
-    //}
 }

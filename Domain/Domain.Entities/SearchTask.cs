@@ -64,34 +64,4 @@ namespace Domain.Entities
         /// </summary>
         public virtual User AssignedTo { get; set; }
     }
-
-
-    /// <summary>
-    /// Задача.
-    /// </summary>
-    //public class SearchTask : IEntity<long>
-    //{
-    //    /// <summary>
-    //    /// Идентификатор.
-    //    /// </summary>
-    //    public long Id { get; set; }
-
-    //    /// <summary>
-    //    /// Тема.
-    //    /// </summary>
-    //    public string Subject { get; set; }
-
-    //    /// <summary>
-    //    /// процесс поиска.
-    //    /// </summary>
-    //    public virtual SearchEvent SearchEvent { get; set; }
-
-    //    /// <summary>
-    //    /// Id процесса поиска.
-    //    /// </summary>
-    //    public long SearchEventId { get; set; }
-
-
-    //    //public DateTime DateTime { get; set; }
-    //}
 }

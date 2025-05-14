@@ -10,13 +10,11 @@ namespace Services.Contracts.SonarTask
         /// <summary>
         /// Идентификатор мероприятия, к которому относится задача
         /// </summary>
-        //[Column("EventId")]
         public long EventId { get; set; }
 
         /// <summary>
         /// Идентификатор пользователя, которому назначена задача
         /// </summary>
-        //[Column("AssignedTo")]
         public long AssignedToId { get; set; }
 
         /// <summary>

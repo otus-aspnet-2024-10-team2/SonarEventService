@@ -66,29 +66,4 @@ namespace WebApi.Models.SearchEvent
         public List<SearchTaskModel> Tasks { get; set; } = new List<SearchTaskModel>();
     }
 
-    ///// <summary>
-    ///// Модель курса.
-    ///// </summary>
-    //public class SearchEventModel
-    //{
-    //    /// <summary>
-    //    /// Id.
-    //    /// </summary>
-    //    public long Id { get; set; }
-
-    //    /// <summary>
-    //    /// Название.
-    //    /// </summary>
-    //    public string Name { get; set; }
-
-    //    ///// <summary>
-    //    ///// Стоимость.
-    //    ///// </summary>
-    //    //public decimal Price { get; set; }
-
-    //    /// <summary>
-    //    /// Задачи поиска.
-    //    /// </summary>
-    //    public List<SearchTaskModel> SearchTasks { get; set; }
-    //}
 }

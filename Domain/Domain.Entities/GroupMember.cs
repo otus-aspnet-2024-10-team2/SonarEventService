@@ -51,19 +51,3 @@ public class GroupMember : IEntity<long>
     /// </summary>
     public virtual User User { get; set; }
 }
-
-
-///// <summary>
-///// Участник группы поиска
-///// </summary>
-//public class GroupMember : IEntity<long>
-//{
-//    public long Id { get; set; }
-//    public long GroupId { get; set; }
-//    public virtual SearchGroup Group { get; set; }
-//    public long UserId { get; set; }
-//    public virtual SearchUser User { get; set; }
-//    public string Role { get; set; }
-//    public DateTime CreatedAt { get; set; }
-//    public DateTime UpdatedAt { get; set; }
-//}
