@@ -45,7 +45,7 @@ public class SearchAnnouncementService : ISearchAnnouncementService
     /// <summary>
     /// Создать объявление поиска.
     /// </summary>
-    /// <param name="сreatingSearchAnnouncementDto"> ДТО задачи. </param>
+    /// <param name="сreatingSearchAnnouncementDto"> ДТО объявления. </param>
     /// <returns> Идентификатор. </returns>
     public async Task<long> CreateAsync(CreatingSearchAnnouncementDto сreatingSearchAnnouncementDto)
     {
@@ -59,7 +59,7 @@ public class SearchAnnouncementService : ISearchAnnouncementService
     /// Изменить объявление поиска.
     /// </summary>
     /// <param name="id"> Идентификатор. </param>
-    /// <param name="updatingSearchAnnouncementDto"> ДТО задачи поиска. </param>
+    /// <param name="updatingSearchAnnouncementDto"> ДТО объявления поиска. </param>
     public async Task UpdateAsync(long id, UpdatingSearchAnnouncementDto updatingSearchAnnouncementDto)
     {
         var searchAnnouncement = await _searchAnnouncementRepository.GetAsync(id, CancellationToken.None);

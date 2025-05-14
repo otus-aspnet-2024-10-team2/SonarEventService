@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using WebApi.Models.Animal;
+using WebApi.Models.SearchRequest;
 using WebApi.Models.User;
 
 namespace WebApi.Models.SearchAnnouncement;

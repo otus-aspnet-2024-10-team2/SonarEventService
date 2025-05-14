@@ -1,6 +1,8 @@
 ﻿using Services.Contracts.Animal;
+using Services.Contracts.SearchRequest;
 using Services.Contracts.User;
 using System;
+using System.Collections.Generic;
 
 namespace Services.Contracts.SearchAnnouncement;
 
