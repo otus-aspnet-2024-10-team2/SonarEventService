@@ -28,7 +28,8 @@ namespace WebApi.Controllers
         [HttpGet("{eventId}")]
         public async Task<IActionResult> GetAsync(long eventId)
         {
-            return Ok(_mapper.Map<SearchEventModel>(await _service.GetByIdAsync(eventId)));
+            var res = _mapper.Map<SearchEventModel>(await _service.GetByIdAsync(eventId));
+            return Ok(res);
 
             //return Ok((SearchEventModel)CDH.GetTestSearchEventModel());  // ОТЛАДКА УДАЛИТЬ
 

@@ -39,15 +39,8 @@ namespace Services.Implementations
         /// <returns> ДТО задачи поиска. </returns>
         public async Task<SearchTaskDto> GetByIdAsync(long id, CancellationToken cancellationToken)
         {
-            try
-            {
-                var searchTask = await _searchTaskRepository.GetAsync(id, cancellationToken);
-                return _mapper.Map<SearchTask, SearchTaskDto>(searchTask);
-            }
-            catch (Exception e) // VDV: Убрать
-            {
-                throw e;
-            }
+            var searchTask = await _searchTaskRepository.GetAsync(id, cancellationToken);
+            return _mapper.Map<SearchTask, SearchTaskDto>(searchTask);
         }
 
         /// <summary>

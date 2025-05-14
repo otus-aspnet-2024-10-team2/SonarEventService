@@ -9,7 +9,7 @@ namespace Services.Repositories.Abstractions
     {
         ISearchTaskRepository LessonRepository { get; }
 
-        ISonarProcessRepository CourseRepository { get; }
+        ISearchEventRepository CourseRepository { get; }
 
         Task SaveChangesAsync();
     }

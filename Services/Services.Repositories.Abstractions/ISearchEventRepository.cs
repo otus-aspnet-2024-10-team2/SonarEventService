@@ -8,7 +8,7 @@ namespace Services.Repositories.Abstractions
     /// <summary>
     /// Репозиторий работы с процессами поиска
     /// </summary>
-    public interface ISonarProcessRepository: IRepository<SearchEvent, long>
+    public interface ISearchEventRepository: IRepository<SearchEvent, long>
     {
         /// <summary>
         /// Получить постраничный список.

@@ -26,7 +26,7 @@ namespace Infrastructure.Repositories.Implementations
         /// <returns> Задача поиска. </returns>
         public override async Task<SearchTask> GetAsync(long id, CancellationToken cancellationToken)
         {
-            //await Task.Delay(TimeSpan.FromSeconds(20));
+            //await Task.Delay(TimeSpan.FromSeconds(20)); // VDV: Причесать
             var query = _context.Set<SearchTask>().AsQueryable();
             query = query.Where(l => l.Id == id );
             var res = await query.SingleOrDefaultAsync();

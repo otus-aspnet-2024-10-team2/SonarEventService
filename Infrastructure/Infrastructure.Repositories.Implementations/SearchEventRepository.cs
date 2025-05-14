@@ -13,7 +13,7 @@ namespace Infrastructure.Repositories.Implementations
     /// <summary>
     /// Репозиторий работы с мероприятиями поиска.
     /// </summary>
-    public class SearchEventRepository: Repository<SearchEvent, long>, ISonarProcessRepository
+    public class SearchEventRepository: Repository<SearchEvent, long>, ISearchEventRepository
     {
         public SearchEventRepository(DatabaseContext context): base(context)
         {

@@ -15,37 +15,38 @@ namespace Services.Implementations
     /// <summary>
     /// Cервис работы с процессами поиска.
     /// </summary>
-    public class SonarProcessService : ISearchEventService
+    public class SearchEventService : ISearchEventService
     {
         private readonly IMapper _mapper;
-        private readonly ISonarProcessRepository _sonarProcessRepository;
-        private readonly ISearchTaskRepository _sonarTaskRepository;
+        private readonly ISearchEventRepository _searchEventRepository;
+        private readonly ISearchTaskRepository _searchTaskRepository;
         private readonly IBusControl _busControl;
         private readonly IUnitOfWork _unitOfWork;
 
-        public SonarProcessService(
+        public SearchEventService(
             IMapper mapper,
-            ISonarProcessRepository sonarProcessRepository,
-            ISearchTaskRepository sonarTaskRepository,
+            ISearchEventRepository searchEventRepository,
+            ISearchTaskRepository searchTaskRepository,
             IUnitOfWork unitOfWork,
             IBusControl busControl)
         {
             _mapper = mapper;
-            _sonarProcessRepository = sonarProcessRepository;
-            _sonarTaskRepository = sonarTaskRepository;
+            _searchEventRepository = searchEventRepository;
+            _searchTaskRepository = searchTaskRepository;
             _busControl = busControl;
             _unitOfWork = unitOfWork;
         }
 
         /// <summary>
-        /// Получить процесс поиска животного
+        /// Получить мероприятие пика питомца
         /// </summary>
         /// <param name="id"> Идентификатор. </param>
-        /// <returns> ДТО курса. </returns>
+        /// <returns>ДТО меропирятия</returns>
         public async Task<SearchEventDto> GetByIdAsync(long id)
         {
-            var course = await _sonarProcessRepository.GetAsync(id, CancellationToken.None);
-            return _mapper.Map<SearchEvent, SearchEventDto>(course);
+            var searchEventDto = await _searchEventRepository.GetAsync(id, CancellationToken.None);
+            var res = _mapper.Map<SearchEvent, SearchEventDto>(searchEventDto);
+            return res;
         }
 
         /// <summary>
@@ -56,8 +57,8 @@ namespace Services.Implementations
         public async Task<long> CreateAsync(CreatingSearchEventDto creatingSonarProcessDto)
         {
             var course = _mapper.Map<CreatingSearchEventDto, SearchEvent>(creatingSonarProcessDto);
-            var createdSonarProcess = await _sonarProcessRepository.AddAsync(course);
-            await _sonarProcessRepository.SaveChangesAsync();
+            var createdSonarProcess = await _searchEventRepository.AddAsync(course);
+            await _searchEventRepository.SaveChangesAsync();
             /*
             await _busControl.Publish(new MessageDto
             {
@@ -76,8 +77,8 @@ namespace Services.Implementations
         public async Task UpdatingWithSonarTasksAsync(long id, UpdatingSearchEventWithSeacrchTasksDto updatingSonarProcessWithLSonarTasksDto)
         {
             //var course = await _unitOfWork.CourseRepository.GetAsync(id, CancellationToken.None);
-            var sonarProcess = await _sonarProcessRepository.GetAsync(id, CancellationToken.None);
-            if (sonarProcess == null)
+            var searchEvent = await _searchEventRepository.GetAsync(id, CancellationToken.None);
+            if (searchEvent == null)
             {
                 throw new Exception($"Курс с идентфикатором {id} не найден");
             }
@@ -85,18 +86,18 @@ namespace Services.Implementations
             // VDV: Настроить под новые данные
             //sonarProcess.Name = updatingSonarProcessWithLSonarTasksDto.Name;
             //sonarProcess.Price = updatingSonarProcessWithLSonarTasksDto.Price;
-            _sonarProcessRepository.Update(sonarProcess);
-            await _sonarProcessRepository.SaveChangesAsync();
+            _searchEventRepository.Update(searchEvent);
+            await _searchEventRepository.SaveChangesAsync();
             //_unitOfWork.CourseRepository.Update(course);
             var sonarTasks = _mapper.Map<IEnumerable<AttachingSearchTasksDto>, IEnumerable<SearchTask>>(updatingSonarProcessWithLSonarTasksDto.SonarTasks);
             foreach (var lesson in sonarTasks)
             {
                 lesson.EventId = 100; //Не существует VDV: Момент смотреть нужна отладка
-                await _sonarTaskRepository.AddAsync(lesson);
+                await _searchTaskRepository.AddAsync(lesson);
                 //await _unitOfWork.LessonRepository.AddAsync(lesson);
             }
             
-            await _sonarTaskRepository.SaveChangesAsync();
+            await _searchTaskRepository.SaveChangesAsync();
             //await _unitOfWork.SaveChangesAsync();
         }
 
@@ -107,7 +108,7 @@ namespace Services.Implementations
         /// <param name="updatingCourseDto"> ДТО редактируемого процесса поиска. </param>
         public async Task UpdateAsync(long id, UpdatingSearchEventDto updatingCourseDto)
         {
-            var sonarProcess = await _sonarProcessRepository.GetAsync(id, CancellationToken.None);
+            var sonarProcess = await _searchEventRepository.GetAsync(id, CancellationToken.None);
             if (sonarProcess == null)
             {
                 throw new Exception($"Мероприятие поиска с идентфикатором {id} не найден");
@@ -116,23 +117,23 @@ namespace Services.Implementations
             // VDV: Настроить под новые данные
             //sonarProcess.Name = updatingCourseDto.Name;
             //sonarProcess.Price = updatingCourseDto.Price;
-            _sonarProcessRepository.Update(sonarProcess);
-            await _sonarProcessRepository.SaveChangesAsync();
+            _searchEventRepository.Update(sonarProcess);
+            await _searchEventRepository.SaveChangesAsync();
         }
 
         /// <summary>
-        /// Удалить процесс поиска.
+        /// Удалить мероприятие поиска
         /// </summary>
         /// <param name="id"> Идентификатор. </param>
         public async Task DeleteAsync(long id)
         {
-            var sonarProcess = await _sonarProcessRepository.GetAsync(id, CancellationToken.None);
-            var deleted = _sonarProcessRepository.Delete(id);
+            var searchEvent = await _searchEventRepository.GetAsync(id, CancellationToken.None);
+            var deleted = _searchEventRepository.Delete(id);
             if (!deleted)
             {
                 throw new Exception($"Мероприятие поиска с идентфикатором {id} не удалена!");
             }
-            await _sonarProcessRepository.SaveChangesAsync();
+            await _searchEventRepository.SaveChangesAsync();
 
             //var searchGroup = await _searchGroupRepository.GetAsync(id, CancellationToken.None);
             //var deleted = _searchGroupRepository.Delete(id);
@@ -150,7 +151,7 @@ namespace Services.Implementations
         /// <returns> Список поисков. </returns>
         public async Task<ICollection<SearchEventDto>> GetPagedAsync(SearchEventFilterDto filterDto)
         {
-            ICollection<SearchEvent> entities = await _sonarProcessRepository.GetPagedAsync(filterDto);
+            ICollection<SearchEvent> entities = await _searchEventRepository.GetPagedAsync(filterDto);
             return _mapper.Map<ICollection<SearchEvent>, ICollection<SearchEventDto>>(entities);
         }
     }
