@@ -25,32 +25,32 @@ namespace WebApi.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("{animalId}")]
-        public async Task<IActionResult> GetAsync(long animalId, CancellationToken cancellationToken)
-        {
-            var animalDto = await _service.GetByIdAsync(animalId, cancellationToken);
-            return Ok(_mapper.Map<AnimalDto, AnimalModel>(animalDto));
-        }
+        //[HttpGet("{animalId}")]
+        //public async Task<IActionResult> GetAsync(long animalId, CancellationToken cancellationToken)
+        //{
+        //    var animalDto = await _service.GetByIdAsync(animalId, cancellationToken);
+        //    return Ok(_mapper.Map<AnimalDto, AnimalModel>(animalDto));
+        //}
 
-        [HttpPost]
-        public async Task<IActionResult> AddAsync(CreatingAnimalModel creatingSonarTaskDto)
-        {
-            return Ok(await _service.CreateAsync(_mapper.Map<CreatingAnimalModel, CreatingAnimalDto>(creatingSonarTaskDto)));
-        }
+        //[HttpPost]
+        //public async Task<IActionResult> AddAsync(CreatingAnimalModel creatingSonarTaskDto)
+        //{
+        //    return Ok(await _service.CreateAsync(_mapper.Map<CreatingAnimalModel, CreatingAnimalDto>(creatingSonarTaskDto)));
+        //}
 
-        [HttpPut("{animalId}")]
-        public async Task<IActionResult> EditAsync(int animalId, UpdatingAnimalModel creatingLessonDto)
-        {
-            await _service.UpdateAsync(animalId, _mapper.Map<UpdatingAnimalModel, UpdatingAnimalDto>(creatingLessonDto));
-            return Ok();
-        }
+        //[HttpPut("{animalId}")]
+        //public async Task<IActionResult> EditAsync(int animalId, UpdatingAnimalModel creatingLessonDto)
+        //{
+        //    await _service.UpdateAsync(animalId, _mapper.Map<UpdatingAnimalModel, UpdatingAnimalDto>(creatingLessonDto));
+        //    return Ok();
+        //}
 
-        [HttpDelete("{animalId}")]
-        public async Task<IActionResult> DeleteAsync(int animalId)
-        {
-            await _service.DeleteAsync(animalId);
-            return Ok();
-        }
+        //[HttpDelete("{animalId}")]
+        //public async Task<IActionResult> DeleteAsync(int animalId)
+        //{
+        //    await _service.DeleteAsync(animalId);
+        //    return Ok();
+        //}
 
         [HttpGet("list/{page}/{itemsPerPage}")]
         public async Task<IActionResult> GetListAsync(int page, int itemsPerPage)
