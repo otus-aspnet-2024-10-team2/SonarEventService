@@ -93,10 +93,18 @@ namespace WebApi
                 cfg.AddProfile<SearchTaskMappingsProfile>(); 
                 cfg.AddProfile<SearchGroupMappingProfile>();
                 cfg.AddProfile<GroupMemberMappingProfile>();
+                cfg.AddProfile<UserMappingProfile>();
+                cfg.AddProfile<AnimalMappingProfile>();
+                cfg.AddProfile<SearchAnnouncementMappingProfile>();
+                cfg.AddProfile<SearchRequestMappingProfile>();
                 cfg.AddProfile<Services.Implementations.Mapping.SearchEventMappingsProfile>(); 
                 cfg.AddProfile<Services.Implementations.Mapping.SearchTaskMappingsProfile>();
                 cfg.AddProfile<Services.Implementations.Mapping.SearchGroupMappingsProfile>();
                 cfg.AddProfile<Services.Implementations.Mapping.GroupMemberMappingsProfile>();
+                cfg.AddProfile<Services.Implementations.Mapping.UserMappingsProfile>();
+                cfg.AddProfile<Services.Implementations.Mapping.AnimalMappingsProfile>();
+                cfg.AddProfile<Services.Implementations.Mapping.SearchAnnouncementMappingsProfile>();
+                cfg.AddProfile<Services.Implementations.Mapping.SearchRequestMappingsProfile>();
             });
             configuration.AssertConfigurationIsValid();
             return configuration;

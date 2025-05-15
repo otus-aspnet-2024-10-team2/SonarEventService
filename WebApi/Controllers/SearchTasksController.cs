@@ -13,13 +13,13 @@ namespace WebApi.Controllers
     [ApiController]
     //[Route("[controller]")]
     [Route("api/v1/search-tasks")]
-    public class SearchTaskController: ControllerBase
+    public class SearchTasksController: ControllerBase
     {
         private readonly ISearchTaskService _service;
-        private readonly ILogger<SearchTaskController> _logger;
+        private readonly ILogger<SearchTasksController> _logger;
         private readonly IMapper _mapper;
 
-        public SearchTaskController(ISearchTaskService service, ILogger<SearchTaskController> logger, IMapper mapper)
+        public SearchTasksController(ISearchTaskService service, ILogger<SearchTasksController> logger, IMapper mapper)
         {
             _service = service;
             _logger = logger;

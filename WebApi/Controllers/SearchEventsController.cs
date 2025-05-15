@@ -11,13 +11,13 @@ namespace WebApi.Controllers
 {
     [ApiController]
     [Route("api/v1/search-events")] //[Route("[controller]")]
-    public class SearchEventController: ControllerBase
+    public class SearchEventsController: ControllerBase
     {
         private readonly ISearchEventService _service;
         private readonly IMapper _mapper;
-        private readonly ILogger<SearchEventController> _logger;
+        private readonly ILogger<SearchEventsController> _logger;
 
-        public SearchEventController(ISearchEventService service, ILogger<SearchEventController> logger, IMapper mapper)
+        public SearchEventsController(ISearchEventService service, ILogger<SearchEventsController> logger, IMapper mapper)
         {
             _service = service;
             _logger = logger;
